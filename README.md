@@ -16,23 +16,23 @@ This is not just a golf scorecard. It is a reference implementation for decentra
 
 ## Project Thesis
 
-Most amateur and semi-professional sporting events still run on a fragile mix of spreadsheets, WhatsApp groups, manual scorecards, proprietary tournament tools, and disconnected payment flows.
+Most amateur and semi-professional sporting events still run on a fragile mix of spreadsheets, chat groups, manual scorecards, proprietary tournament tools, and disconnected payment flows.
 
 Ride or Die Scorecard aims to prove a different model:
 
-1. **Identity should be portable.**  
+1. **Identity should be portable.**
    Participants should be able to use Nostr identities instead of platform-owned accounts.
 
-2. **Payments should be Bitcoin-native.**  
+2. **Payments should be Bitcoin-native.**
    Registration fees, zaps, rewards, and sponsorship contributions should flow through Bitcoin and Lightning, preferably through non-custodial wallet connections.
 
-3. **Event data should be open and composable.**  
+3. **Event data should be open and composable.**
    Scores, achievements, course data, public updates, and attestations should be structured so other clients and services can build on top.
 
-4. **The app should be usable at a real tournament.**  
+4. **The app should be usable at a real tournament.**
    This is not a protocol demo. The first target is a working golf event with registration, scorekeeping, live updates, and operational reliability.
 
-5. **The stack should be open source by default.**  
+5. **The stack should be open source by default.**
    Core components should avoid proprietary lock-in. Any dependency should be reviewed for license compatibility and long-term project fit.
 
 ---
@@ -46,6 +46,7 @@ At its core, the app combines:
 - **Nostr identity** for players, team managers, scorers, organizers, and fans
 - **Tournament registration** with team and player management
 - **Bitcoin/Lightning payments** for fees, zaps, and rewards
+- **Non-custodial wallet connectivity** through Nostr Wallet Connect / NIP-47 where feasible
 - **Live golf scoring** for the on-site event
 - **Pre-event qualification scoring** for players practicing at home courses
 - **Peer or marker attestations** for submitted practice scores
@@ -134,8 +135,10 @@ The MVP should support:
 
 - Manual course creation
 - Basic course fields: name, location, holes, par, tee information where available
-- Import path for open data sources such as OpenStreetMap-derived data or other openly licensed datasets
-- Clear source attribution and license tracking
+- Import path for OpenStreetMap-derived data or other openly licensed datasets
+- Source attribution and license tracking
+- User correction and enrichment proposals
+- Review status for submitted course data changes
 
 #### 7. Progressive Web App
 
@@ -294,6 +297,7 @@ Tests workflows, edge cases, device compatibility, score correctness, payment st
 - Community enrichment
 - Ratings and quality signals
 - Source/license tracking
+- Contributor provenance and review status
 
 ### Fan Engagement
 
@@ -309,6 +313,71 @@ Tests workflows, edge cases, device compatibility, score correctness, payment st
 - Infrastructure sponsorship
 - Prize sponsorship
 - Service contributions from Bitcoin/Nostr ecosystem projects
+
+---
+
+## Repository Setup
+
+This repository should contain the core application code plus project governance material.
+
+Recommended structure:
+
+```text
+.github/
+  ISSUE_TEMPLATE/
+    bug_report.yml
+    feature_request.yml
+    license_review.yml
+    security_report.yml
+    ux_review.yml
+README.md
+CONTRIBUTING.md
+CODE_OF_CONDUCT.md
+SECURITY.md
+SUPPORT.md
+```
+
+The issue templates are intentionally structured. Use them instead of blank issues whenever possible.
+
+---
+
+## Issue Workflow
+
+Issues should be small enough to review and test. Large ideas should be split into backlog epics or multiple implementation issues.
+
+Use the label families consistently:
+
+- `area/...` — product or technical area
+- `priority/...` — sequencing importance
+- `role/...` — likely contributor profile
+- `license-review/required` — dependency or data source requires license review
+- `security-review/required` — sensitive area requires security review
+- `good-first-issue` — suitable for new contributors
+
+Typical flow:
+
+1. Create or pick an issue.
+2. Confirm acceptance criteria.
+3. Add area, priority, and role labels.
+4. Add `license-review/required` for new dependencies, external datasets, map/course data sources, or sponsor-provided services.
+5. Add `security-review/required` for identity, auth, wallet, payment, Nostr key handling, permissions, or infrastructure changes.
+6. Open a focused pull request.
+7. Link the pull request to the issue.
+8. Close the issue only after acceptance criteria and review checks are satisfied.
+
+---
+
+## Issue Templates
+
+Use these templates:
+
+- **Feature request** — new product or technical capability
+- **Bug report** — broken behavior or regression
+- **Security review / vulnerability report** — security-sensitive work or responsible disclosure placeholder
+- **License review** — dependency, dataset, tool, map layer, or hosted service review
+- **UX review** — usability, accessibility, mobile/PWA, role-specific flows
+
+Security vulnerabilities should follow `SECURITY.md`. Do not disclose exploitable vulnerabilities publicly unless maintainers have agreed to a disclosure path.
 
 ---
 
@@ -347,6 +416,36 @@ The likely architecture is:
 
 ---
 
+## Development Environment
+
+The project should support contributors using Linux, macOS, and Windows with WSL.
+
+For Windows contributors, use **VS Code with WSL** rather than running shell scripts from PowerShell.
+
+Recommended WSL flow:
+
+```bash
+# Open the repository inside WSL
+cd ~/code/ride-or-die-scorecard
+
+# Check tooling
+git --version
+python3 --version
+gh --version
+
+# Authenticate GitHub CLI if needed
+gh auth login
+```
+
+If scripts fail because of Windows line endings, run:
+
+```bash
+find . -name "*.sh" -exec sed -i 's/\r$//' {} \;
+find . -name "*.sh" -exec chmod +x {} \;
+```
+
+---
+
 ## Initial Sprint Direction
 
 ### Sprint 0: Project Foundation
@@ -359,6 +458,10 @@ Focus:
 - README
 - License
 - Contribution guide
+- Code of conduct
+- Security policy
+- Support policy
+- Issue templates
 - Label and issue structure
 - Architecture decision records
 - Open-source dependency review process
@@ -484,7 +587,13 @@ For MVP issues, done means:
 
 ## Current Status
 
-This project is in early MVP planning and backlog formation.
+This project is in early MVP planning and repository formation.
 
-The immediate next step is to turn the MVP scope into implementable issues, validate the technical architecture, and begin Sprint 0 project setup.
+The immediate priorities are:
+
+1. Finalize repository governance files.
+2. Import the initial issue backlog.
+3. Validate labels, milestones, and issue templates.
+4. Start Sprint 0 project foundation work.
+5. Move from planning artifacts into working prototypes.
 

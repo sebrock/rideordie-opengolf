@@ -47,6 +47,7 @@ You do not need to be a Bitcoin, Nostr, or golf expert to contribute. Useful con
 4. Pick an issue with a matching `role/...` label.
 5. Comment on the issue before starting larger work.
 6. Keep pull requests small and focused.
+7. Use the repository pull request template for every PR.
 
 Suggested first areas:
 
@@ -256,38 +257,92 @@ Improve mobile scorekeeper form labels
 
 ---
 
-## Pull request expectations
+## Pull request workflow
+
+Use the project pull request template at:
+
+```text
+.github/pull_request_template.md
+```
+
+Do not delete checklist sections from the template. Mark items as complete, not applicable, or requiring follow-up. If a checkbox is not applicable, add a short note explaining why.
 
 A pull request should include:
 
 - What changed
 - Why it changed
+- Linked issue number
 - Screenshots or screen recordings for UI changes
 - Tests or a testing note
 - Security considerations, if relevant
-- License considerations, if new dependencies or data sources were added
-- Accessibility considerations, if user-facing behavior changed
-- Linked issue number
+- License considerations, if new dependencies, datasets, assets, or hosted services were added
+- UX and accessibility considerations, if user-facing behavior changed
+- Migration, deployment, or rollback notes when relevant
 
-### Pull request checklist
+### Required PR checks
 
 Before requesting review, confirm:
 
 - [ ] The change is focused and understandable.
 - [ ] The implementation follows the open-source-only principle.
-- [ ] New dependencies have been license-checked.
-- [ ] External data sources have attribution and license notes.
-- [ ] Security-sensitive areas are clearly marked.
-- [ ] User-facing changes are accessible.
-- [ ] Documentation has been updated where needed.
+- [ ] The PR uses the repository pull request template.
+- [ ] The PR links to a GitHub issue.
 - [ ] Tests or manual verification steps are included.
-- [ ] The pull request links to a GitHub issue.
+- [ ] Documentation has been updated where needed.
+- [ ] User-facing changes include UX/accessibility notes.
+
+### License-review checkbox
+
+The PR template includes license-review checkboxes. Mark license review as required when the PR adds, changes, imports, embeds, vendors, scrapes, or depends on any of the following:
+
+- Application dependencies or dev dependencies
+- Golf course datasets or user-contributed data schemas
+- Map tiles, map libraries, geocoding services, or routing services
+- Nostr, Bitcoin, Lightning, or wallet libraries
+- Hosted sponsor services or third-party APIs
+- Images, icons, fonts, templates, generated assets, or brand assets
+- Code copied or adapted from another project
+
+If license review is required, the PR should include:
+
+- Source name and URL
+- License name and version
+- Commercial-use status
+- Attribution requirements
+- Copyleft or share-alike implications
+- Reason the component is compatible with the project
+
+Do not merge license-sensitive work until the license review is complete.
+
+### Security-review checkbox
+
+The PR template includes security-review checkboxes. Mark security review as required when the PR touches any of the following:
+
+- Nostr key handling, signing, login, or identity flows
+- Authentication, authorization, roles, or admin permissions
+- Nostr Wallet Connect / NIP-47 wallet flows
+- Lightning payments, zaps, rewards, refunds, or fee contributions
+- Score attestation, anti-cheat rules, data integrity, or audit trails
+- Secrets, environment variables, infrastructure, deployment, or CI/CD
+- Webhooks, external APIs, background jobs, importers, or scrapers
+- Personal data, contact information, player registration, or event operations
+
+If security review is required, the PR should include:
+
+- Threats considered
+- Sensitive data touched
+- Permissions required
+- Failure modes
+- Manual test steps
+- Rollback or mitigation plan where relevant
+
+Do not merge security-sensitive work until the security review is complete.
 
 ---
 
 ## Review gates
 
-Some work should not merge without explicit review.
+Some work should not merge without explicit review. These gates apply both to issue labels and to pull request checklist items.
 
 ### License review required
 

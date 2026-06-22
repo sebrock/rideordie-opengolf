@@ -330,6 +330,11 @@ Recommended structure:
     license_review.yml
     security_report.yml
     ux_review.yml
+  pull_request_template.md
+docs/
+  adr/
+    README.md
+    0000-adr-template.md
 README.md
 CONTRIBUTING.md
 CODE_OF_CONDUCT.md
@@ -338,6 +343,31 @@ SUPPORT.md
 ```
 
 The issue templates are intentionally structured. Use them instead of blank issues whenever possible.
+
+---
+
+## Architecture Decision Records
+
+Architecture Decision Records, or ADRs, capture important decisions that should remain visible after the original issue or pull request is closed. Use ADRs when a decision affects architecture, data models, security posture, wallet/payment flows, Nostr/Lightning protocol usage, licensing posture, or long-term project governance.
+
+Start here:
+
+- [ADR index](docs/adr/README.md) — explains the ADR process and lists planned placeholder decisions
+- [ADR template](docs/adr/0000-adr-template.md) — copy this when proposing a new decision
+
+Current placeholder ADR topics include:
+
+- Nostr identity and signed user actions
+- Nostr Wallet Connect / NIP-47 and non-custodial Lightning flows
+- Progressive Web App client strategy
+- Open-source-only dependency and license-review gates
+- Open map/course-data sources and community enrichment
+- Scorekeeper and peer-attestation workflows
+- Nostr score posts, badges, zaps, and relay strategy
+- Betting/prediction market deferral until legal review
+- GitHub labels, issue templates, PR template, and review gates
+
+When a pull request introduces or changes one of these decisions, it should reference the relevant ADR. If no ADR exists yet, create one using the template and mark it `Proposed`.
 
 ---
 
@@ -463,7 +493,7 @@ Focus:
 - Support policy
 - Issue templates
 - Label and issue structure
-- Architecture decision records
+- Architecture Decision Record index and template
 - Open-source dependency review process
 
 ### Sprint 1: Identity and Registration

@@ -15,7 +15,7 @@ ADRs are used for decisions that shape architecture, data, security, licensing, 
 ## ADR Index
 
 | ADR | Title | Status |
-|---:|---|---|
+| ---: | --- | --- |
 | [0000](0000-adr-template.md) | ADR Template | Template |
 | [0001](0001-use-nostr-for-identity.md) | Use Nostr for Identity | Proposed |
 | [0002](0002-use-nostr-wallet-connect-for-lightning.md) | Use Nostr Wallet Connect for Lightning Wallet Integration | Proposed |

@@ -1,0 +1,98 @@
+name: Bug report
+description: Report something that is broken or behaving incorrectly
+title: "[Bug]: "
+labels:
+  - area/triage
+  - priority/triage
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this for reproducible bugs. Do not report private keys, wallet secrets, seed phrases, or sensitive security vulnerabilities here.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What is broken?
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - area/identity
+        - area/registration
+        - area/scoring
+        - area/course-data
+        - area/wallet
+        - area/zaps
+        - area/badges-achievements
+        - area/live-scoreboard
+        - area/admin
+        - area/pwa
+        - area/accessibility
+        - area/ux
+        - area/devops
+        - area/docs
+        - area/triage
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Go to...
+        2. Click...
+        3. Enter...
+        4. See error...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Browser, OS, device, PWA install status, wallet, Nostr extension/client, relay setup.
+      placeholder: |
+        - OS:
+        - Browser:
+        - Device:
+        - PWA installed: yes/no
+        - Wallet/NWC provider:
+        - Nostr signer/extension:
+        - Relays:
+    validations:
+      required: false
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / screenshots
+      description: Paste logs or attach screenshots. Remove tokens, keys, invoices with sensitive metadata, and private data.
+      render: shell
+    validations:
+      required: false
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - priority/p0-critical
+        - priority/p1-high
+        - priority/p2-medium
+        - priority/p3-low
+        - priority/triage
+    validations:
+      required: true

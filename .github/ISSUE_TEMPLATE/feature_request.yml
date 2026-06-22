@@ -1,0 +1,113 @@
+name: Feature request
+description: Propose a new capability for Ride or Die Scorecard
+title: "[Feature]: "
+labels:
+  - area/product
+  - priority/triage
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for proposing a feature. Keep it practical, open-source aligned, and tied to the MVP or roadmap.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What should be added?
+      placeholder: "Add Nostr-based score attestation for pre-event qualification scores."
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / opportunity
+      description: What user problem, event need, or contributor opportunity does this solve?
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - area/identity
+        - area/registration
+        - area/scoring
+        - area/course-data
+        - area/wallet
+        - area/zaps
+        - area/badges-achievements
+        - area/live-scoreboard
+        - area/admin
+        - area/pwa
+        - area/accessibility
+        - area/ux
+        - area/devops
+        - area/docs
+        - area/product
+    validations:
+      required: true
+  - type: dropdown
+    id: user-role
+    attributes:
+      label: Primary user role
+      options:
+        - role/player
+        - role/scorekeeper
+        - role/team-manager
+        - role/fan
+        - role/organizer
+        - role/sponsor
+        - role/developer
+        - role/ux
+        - role/security
+        - role/maintainer
+    validations:
+      required: true
+  - type: textarea
+    id: user-story
+    attributes:
+      label: User story
+      description: Use the format “As a..., I want..., so that...”.
+      placeholder: "As a player, I want to connect my Nostr identity so that my scores and attestations are tied to my public key."
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance criteria
+      description: What must be true for this to be done?
+      placeholder: |
+        - [ ] User can...
+        - [ ] System validates...
+        - [ ] UI explains...
+    validations:
+      required: true
+  - type: checkboxes
+    id: reviews
+    attributes:
+      label: Required reviews
+      options:
+        - label: Security review may be required
+        - label: License review may be required
+        - label: UX review may be required
+        - label: Accessibility review may be required
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority suggestion
+      options:
+        - priority/p0-critical
+        - priority/p1-high
+        - priority/p2-medium
+        - priority/p3-low
+        - priority/triage
+    validations:
+      required: true
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution readiness
+      options:
+        - label: This could be a good first issue
+        - label: I am willing to help implement this
+        - label: I can help test this during a real golf round

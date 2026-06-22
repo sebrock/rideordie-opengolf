@@ -1,0 +1,96 @@
+name: UX review
+description: Request review of a user flow, screen, copy, or accessibility behavior
+title: "[UX Review]: "
+labels:
+  - area/ux
+  - priority/triage
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this for usability, accessibility, onboarding, scorekeeper workflow, wallet flow, and tournament-day experience reviews.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What needs UX review?
+    validations:
+      required: true
+  - type: dropdown
+    id: user-role
+    attributes:
+      label: Primary user role
+      options:
+        - role/player
+        - role/scorekeeper
+        - role/team-manager
+        - role/fan
+        - role/organizer
+        - role/sponsor
+        - role/developer
+        - role/ux
+        - role/security
+        - role/maintainer
+    validations:
+      required: true
+  - type: dropdown
+    id: flow
+    attributes:
+      label: Flow / product area
+      options:
+        - Nostr onboarding/login
+        - Player registration
+        - Team management
+        - Score entry
+        - Score attestation
+        - Live scoreboard
+        - Wallet connection
+        - Fee payment
+        - Zaps/rewards
+        - Course data search
+        - Course data correction/enrichment
+        - Admin/event operations
+        - PWA install/offline behavior
+        - Accessibility
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Link designs, screenshots, prototype, branch, or issue references.
+    validations:
+      required: false
+  - type: textarea
+    id: review-goals
+    attributes:
+      label: Review goals
+      placeholder: |
+        - Can a first-time player understand this?
+        - Can a scorekeeper complete this under time pressure?
+        - Is the wallet language non-custodial and clear?
+    validations:
+      required: true
+  - type: checkboxes
+    id: ux-checklist
+    attributes:
+      label: UX checklist
+      options:
+        - label: Clear primary action
+        - label: Clear error and empty states
+        - label: Mobile-first layout considered
+        - label: PWA install/offline behavior considered
+        - label: Accessibility considered, including keyboard and screen readers
+        - label: Copy is understandable to non-technical users
+        - label: Bitcoin/Nostr concepts are explained only where needed
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance criteria for UX approval
+      placeholder: |
+        - [ ] Flow can be completed by target role without maintainer help
+        - [ ] Critical actions include confirmation or undo
+        - [ ] Accessibility issues are documented or fixed
+    validations:
+      required: true

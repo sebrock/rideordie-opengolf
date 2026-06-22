@@ -1,0 +1,67 @@
+name: Security review / vulnerability report
+description: Request security review or report a non-sensitive security concern
+title: "[Security]: "
+labels:
+  - security-review/required
+  - priority/triage
+body:
+  - type: markdown
+    attributes:
+      value: |
+        If this is an exploitable vulnerability, do not disclose sensitive details publicly. Follow SECURITY.md and use the private reporting channel configured by maintainers.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Describe the security concern without exposing secrets or live exploit details.
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Security category
+      options:
+        - Nostr key handling
+        - Nostr Wallet Connect / NIP-47
+        - Lightning payment flow
+        - Zap/reward flow
+        - Score attestation integrity
+        - Authentication/session handling
+        - Authorization/role permissions
+        - Data validation/input handling
+        - Dependency/supply chain
+        - Infrastructure/secrets
+        - Privacy/data minimization
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: affected-components
+    attributes:
+      label: Affected components
+      placeholder: "Frontend wallet connection, backend payment verifier, relay listener, etc."
+    validations:
+      required: true
+  - type: textarea
+    id: risk
+    attributes:
+      label: Risk / impact
+      description: What could go wrong? Who is affected?
+    validations:
+      required: true
+  - type: textarea
+    id: proposed-control
+    attributes:
+      label: Proposed control or mitigation
+      description: Suggested fix, review checklist, or design constraint.
+    validations:
+      required: false
+  - type: checkboxes
+    id: sensitivity
+    attributes:
+      label: Public disclosure check
+      options:
+        - label: This issue does not contain private keys, seed phrases, access tokens, or exploitable proof-of-concept details.
+          required: true
+        - label: This may need maintainer-only/private handling.
+          required: false

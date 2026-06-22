@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  governance-metadata:
+    name: Governance metadata
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate PR license/security metadata
+        if: github.event_name == 'pull_request'
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: bash scripts/ci/check_pr_metadata.sh
+
+      - name: Skip PR metadata check outside pull requests
+        if: github.event_name != 'pull_request'
+        run: echo "PR metadata check is only enforced on pull_request events."
+
+  quality-placeholder:
+    name: Formatter, linter, and tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Run formatter placeholder
+        run: bash scripts/ci/format_check.sh
+
+      - name: Run linter placeholder
+        run: bash scripts/ci/lint_check.sh
+
+      - name: Run unit test placeholder
+        run: bash scripts/ci/unit_tests.sh
+
+  dependency-inventory:
+    name: Dependency inventory
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Generate dependency inventory placeholder
+        run: bash scripts/ci/dependency_inventory.sh
+
+      - name: Upload dependency inventory artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-inventory
+          path: artifacts/dependency-inventory.txt
+          if-no-files-found: error

@@ -2,7 +2,12 @@
 
 ## Status
 
-Proposed
+Accepted
+
+- **Date:** 2026-06-22
+- **Decision owners:** sebrock
+- **Reviewers:** sebrock
+
 
 ## Context
 
@@ -12,16 +17,13 @@ The project wants to avoid proprietary account systems and vendor lock-in. Ident
 
 ## Decision
 
-TBD.
-
-Proposed direction: use Nostr public keys as the primary identity anchor for user accounts, profile references, score posts, attestations, zaps, badges, and contribution provenance.
+We will use Nostr public keys as the primary identity anchor for user accounts, profile references, score posts, attestations, zaps, badges, and contribution provenance.
 
 ## Alternatives
 
-- Email/password authentication.
-- OAuth through a proprietary identity provider.
-- Bitcoin wallet address as identity.
+
 - Hybrid account system with optional Nostr linking.
+- Consider Hybrid account system with optional Nostr linking
 
 ## Trade-offs
 

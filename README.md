@@ -657,50 +657,66 @@ The **Ride or Die Scorecard** pitch deck explains the project vision, open-sourc
 Each thumbnail below links to the full-resolution slide image.
 
 #### 1. Introduction
+
 [![Slide 1 - Introduction](./img/deck/thumbs/slide-01.png)](./img/deck/slide-01.png)
 
 #### 2. Executive Summary
+
 [![Slide 2 - Executive Summary](./img/deck/thumbs/slide-02.png)](./img/deck/slide-02.png)
 
 #### 3. Vision, Mission & Objectives
+
 [![Slide 3 - Vision, Mission and Objectives](./img/deck/thumbs/slide-03.png)](./img/deck/slide-03.png)
 
 #### 4. Governance
+
 [![Slide 4 - Governance](./img/deck/thumbs/slide-04.png)](./img/deck/slide-04.png)
 
 #### 5. Roles
+
 [![Slide 5 - Roles](./img/deck/thumbs/slide-05.png)](./img/deck/slide-05.png)
 
 #### 6. Product & UX
+
 [![Slide 6 - Product and UX](./img/deck/thumbs/slide-06.png)](./img/deck/slide-06.png)
 
 #### 7. Sponsorship & Contributors
+
 [![Slide 7 - Sponsorship and Contributors](./img/deck/thumbs/slide-07.png)](./img/deck/slide-07.png)
 
 #### 8. Technical Architecture
+
 [![Slide 8 - Technical Architecture](./img/deck/thumbs/slide-08.png)](./img/deck/slide-08.png)
 
 #### 9. Data Architecture
+
 [![Slide 9 - Data Architecture](./img/deck/thumbs/slide-09.png)](./img/deck/slide-09.png)
 
 #### 10. Security, Privacy & Accessibility
+
 [![Slide 10 - Security, Privacy and Accessibility](./img/deck/thumbs/slide-10.png)](./img/deck/slide-10.png)
 
 #### 11. Roadmap & MVP
+
 [![Slide 11 - Roadmap and MVP](./img/deck/thumbs/slide-11.png)](./img/deck/slide-11.png)
 
 #### 12. Backlog Themes
+
 [![Slide 12 - Backlog Themes](./img/deck/thumbs/slide-12.png)](./img/deck/slide-12.png)
 
 #### 13. Risks & Open Decisions
+
 [![Slide 13 - Risks and Open Decisions](./img/deck/thumbs/slide-13.png)](./img/deck/slide-13.png)
 
 #### 14. Pre-Event Engagement
+
 [![Slide 14 - Pre-Event Engagement](./img/deck/thumbs/slide-14.png)](./img/deck/slide-14.png)
 
 #### 15. Light Wallet & Course Maintenance
+
 [![Slide 15 - Light Wallet and Course Maintenance](./img/deck/thumbs/slide-15.png)](./img/deck/slide-15.png)
 
 #### 16. Join the Build
+
 [![Slide 16 - Join the Build](./img/deck/thumbs/slide-16.png)](./img/deck/slide-16.png)
 <!-- pitch-deck:end -->

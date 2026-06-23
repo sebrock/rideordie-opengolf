@@ -13,6 +13,7 @@ Accepted
 The backend and PWA require hosting, continuous deployment, database management, and monitoring. The project aims to minimize operational overhead while maintaining reliability and non-custodial principles.
 
 Hosting choices impact:
+
 - Time to first deployment
 - Operational complexity (database backups, SSL, monitoring)
 - Scaling capacity and cost
@@ -24,6 +25,7 @@ Hosting choices impact:
 We will use **Railway.app or Render.com** for hosting and deployment.
 
 **Recommended: Railway.app** for MVP because:
+
 - Excellent GitHub integration (auto-deploy on push)
 - Managed PostgreSQL included
 - Simple environment variable management
@@ -31,6 +33,7 @@ We will use **Railway.app or Render.com** for hosting and deployment.
 - Free tier generous for MVP
 
 Additionally:
+
 - **CI/CD**: GitHub Actions for test and lint checks before deployment
 - **Branch Strategy**: main = production, staging = pre-prod testing
 - **Database**: Managed PostgreSQL (Railway/Render managed)
@@ -51,6 +54,7 @@ Additionally:
 ## Trade-offs
 
 **Pros**:
+
 - Zero-ops database management (automatic backups, SSL, scaling)
 - GitHub integration means `git push` → deployed
 - Simple environment variables and secrets management
@@ -60,6 +64,7 @@ Additionally:
 - High uptime SLA (99.9% for production plans)
 
 **Cons**:
+
 - Vendor lock-in (but infrastructure as code keeps costs portable)
 - Limited by managed provider's feature set (negligible for MVP)
 - Pricing scales with usage (manageable with traffic limits)
@@ -88,6 +93,7 @@ Additionally:
 ## Rollback Plan
 
 If Railway/Render becomes a blocker:
+
 1. Migrate to DigitalOcean App Platform (similar API, easier transition)
 2. Migrate to self-hosted (VPS + Docker) if scalability requires
 3. Keep GitHub Actions for CI/CD (works with any provider)
@@ -95,6 +101,7 @@ If Railway/Render becomes a blocker:
 ## Implementation Plan
 
 ### Week 1: Initial Setup
+
 - [ ] Create Railway.app project from GitHub repo
 - [ ] Add postgres template to Railway project
 - [ ] Connect GitHub repository for auto-deploy
@@ -103,12 +110,14 @@ If Railway/Render becomes a blocker:
 - [ ] Verify database connectivity
 
 ### Week 2: CI/CD & Monitoring
+
 - [ ] Create GitHub Actions workflow for testing + linting
 - [ ] Add Sentry for error tracking (optional for MVP)
 - [ ] Configure staging environment for testing
 - [ ] Document deployment process
 
 ### Week 3: Production Hardening
+
 - [ ] Enable backups and test restore cycle
 - [ ] Configure rate limiting and DDoS protection
 - [ ] Add monitoring alerts for critical errors

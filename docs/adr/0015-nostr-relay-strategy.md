@@ -13,6 +13,7 @@ Accepted
 Score attestations, badge issuance, and user identity verification are published as Nostr events. The app must reliably publish and read events from Nostr relays. Relay availability, latency, and content filtering all impact event delivery.
 
 Relay strategy choices impact:
+
 - Event delivery reliability (what if a relay goes down?)
 - User privacy (which relays to publish attestations to?)
 - Query performance (which relays to read from?)
@@ -24,6 +25,7 @@ Relay strategy choices impact:
 We will use **public Nostr relay discovery with one or two primary relays as fallback**, rather than operating our own relays.
 
 Additionally:
+
 - **Relay Client**: Use `nostr-tools` relay abstraction + `relay.js` library
 - **Primary Relays**: damus.io and nostr.band (mature, stable, good uptime)
 - **Read Strategy**: Query from multiple relays, deduplicate results
@@ -41,6 +43,7 @@ Additionally:
 ## Trade-offs
 
 **Pros**:
+
 - Decentralized: No single relay dependency, reduces censorship risk
 - Low operational burden: No relay infrastructure to maintain
 - User choice: Users can configure preferred relays in their Nostr clients
@@ -48,6 +51,7 @@ Additionally:
 - Aligns with Nostr ethos and non-custodial principles
 
 **Cons**:
+
 - Relay availability unpredictable (some go down, some change policies)
 - Latency varies (damus.io slower than local relays)
 - Event filtering inconsistent across relays (some filter spam)
@@ -72,6 +76,7 @@ Additionally:
 ## Rollback Plan
 
 If relay publishing becomes unreliable:
+
 1. Cache events locally and retry on background worker
 2. Add fallback to centralizing events in app database (user can always re-publish)
 3. Implement optional user-provided relay list (advanced feature, post-MVP)
@@ -79,18 +84,21 @@ If relay publishing becomes unreliable:
 ## Implementation Plan
 
 ### Phase 1: Relay Client Setup
+
 - [ ] Install `nostr-tools` and `relay.js`
 - [ ] Create relay manager abstraction (handles multi-relay publish/read)
 - [ ] Configure primary relays (damus.io, nostr.band)
 - [ ] Implement exponential backoff retry logic
 
 ### Phase 2: Event Publishing
+
 - [ ] Create Score Attestation event payload (decide on NIP kind)
 - [ ] Implement score submission → Nostr event publishing
 - [ ] Implement attestation signing and publishing
 - [ ] Add error handling and user feedback
 
 ### Phase 3: Event Reading
+
 - [ ] Implement Nostr event subscription (read attestations)
 - [ ] Cache events locally for offline access
 - [ ] Deduplicate events from multiple relays
@@ -129,6 +137,7 @@ async function readAttestations(filters: Filter[]) {
 ## Event Kind Decision
 
 **Options for Score Attestation**:
+
 1. **NIP-23 (Long-form content)**: Kind 30023, good for detailed attestations
 2. **Custom kind**: e.g., kind 39999, for app-specific events
 3. **NIP-58 (Badges)**: Kind 8, for achievement attestation

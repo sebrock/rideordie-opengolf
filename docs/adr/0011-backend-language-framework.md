@@ -13,6 +13,7 @@ Accepted
 The backend API must support Nostr identity verification, score attestation workflows, non-custodial payment state tracking, and Nostr event publishing. The project prioritizes rapid MVP delivery while maintaining type safety and Bitcoin/Lightning integration.
 
 Backend choices significantly impact:
+
 - Time to MVP
 - Developer experience and hiring
 - Library ecosystem for Nostr and Bitcoin integration
@@ -23,6 +24,7 @@ Backend choices significantly impact:
 We will use **TypeScript 5.x as the language** and **Express.js 4.x as the HTTP framework** for the backend API.
 
 Additionally:
+
 - **ORM**: Prisma.io for database abstraction and type safety
 - **HTTP Protocol**: REST with planned migration to tRPC for end-to-end type safety
 - **Package Manager**: npm or pnpm (recommend pnpm for lockfile)
@@ -40,6 +42,7 @@ Additionally:
 ## Trade-offs
 
 **Pros**:
+
 - TypeScript provides strong type safety for payment and attestation workflows
 - nostr-tools ecosystem is TypeScript-native and well-maintained
 - Express.js is mature, battle-tested, and widely understood
@@ -49,6 +52,7 @@ Additionally:
 - Prisma ORM generates type-safe database queries, reducing audit trail bugs
 
 **Cons**:
+
 - Node.js single-threaded model requires careful async management for high-concurrency scenarios
 - Less mature than Go or Rust for distributed systems (not critical for MVP)
 - Requires attention to memory management under sustained load
@@ -74,6 +78,7 @@ Additionally:
 ## Rollback Plan
 
 If TypeScript/Express complexity becomes a blocker:
+
 1. Migrate to JavaScript (same Express.js codebase, lose type safety)
 2. Migrate to Hono.js if serverless deployment becomes requirement
 

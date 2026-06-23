@@ -13,6 +13,7 @@ Accepted
 ADR-0006 (Score Attestation Model) defines the concept of peer attestation. This ADR defines the verification strategy: how many attestations are required, who can attest, and when scores are accepted.
 
 Attestation verification choices impact:
+
 - Trust model (how much do we trust submitted scores?)
 - Operational load (how many attestors do we need?)
 - User experience (how long do players wait for acceptance?)
@@ -23,6 +24,7 @@ Attestation verification choices impact:
 We will implement **real-time, role-based score attestation verification** with the following rules:
 
 **For MVP**:
+
 - Single marker (role: MARKER) approval required
 - Marker can approve or reject submitted score
 - Organizer can override marker decision
@@ -30,6 +32,7 @@ We will implement **real-time, role-based score attestation verification** with 
 - Real-time: Marker can approve as soon as score is submitted
 
 **For Post-MVP**:
+
 - Peer attestation: Multiple players can attest to score plausibility
 - Reputation system: Attestors with high reputation carry more weight
 - Consensus: 2+ peer attestations needed if no marker present
@@ -44,12 +47,14 @@ We will implement **real-time, role-based score attestation verification** with 
 ## Trade-offs
 
 **Pros**:
+
 - Simple for MVP: Clear decision maker (marker)
 - Scalable: Easy to add peer attestation later
 - Flexible: Organizer can override for edge cases
 - Audit trail: Every decision is recorded with who and when
 
 **Cons**:
+
 - Single marker is a bottleneck if they're not available
 - Collusion risk: Marker and player could both be dishonest (mitigated by organizer override)
 - Peer attestation post-MVP requires reputation system (complex)
@@ -70,6 +75,7 @@ We will implement **real-time, role-based score attestation verification** with 
 ## Rollback Plan
 
 If marker verification is too slow:
+
 1. Auto-accept scores for first 24 hours
 2. Organizer can later dispute and require marker review
 3. Implement background marker notification system
@@ -77,21 +83,25 @@ If marker verification is too slow:
 ## Implementation Plan
 
 ### Phase 1: Role Management
+
 - [ ] Add MARKER, ORGANIZER roles to User model
 - [ ] Create endpoint to assign/revoke marker role (organizer-only)
 - [ ] Implement authorization checks (user can only submit own scores)
 
 ### Phase 2: Score State Machine
+
 - [ ] Add ScoreStatus enum: SUBMITTED, APPROVED, REJECTED, ACCEPTED, DISPUTED
 - [ ] Create score submission endpoint
 - [ ] Create score approval endpoint (marker-only)
 
 ### Phase 3: Real-Time Verification
+
 - [ ] Implement marker notification (WebSocket or polling)
 - [ ] Create pending scores queue view for marker
 - [ ] Implement approval/rejection with comment
 
 ### Phase 4: Organizer Override
+
 - [ ] Implement override endpoint (organizer-only)
 - [ ] Log override reason and timestamp
 - [ ] Publish Nostr event for override (attestation kind 39002)

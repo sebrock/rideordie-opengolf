@@ -13,6 +13,7 @@ Accepted
 Scores can be disputed after approval if a player questions validity or a marker changes their mind. The project needs a clear dispute resolution process that maintains fairness and audit trail.
 
 Dispute resolution choices impact:
+
 - Trust in leaderboards (are all scores validated?)
 - Player satisfaction (can they appeal?)
 - Operational complexity (who decides disputes?)
@@ -29,6 +30,7 @@ We will implement **organizer-led dispute resolution** with the following proces
 5. **Finality**: Final organizer decision is binding
 
 Additionally:
+
 - All disputes logged with full audit trail (who, what, when, why)
 - Disputes published as Nostr events (kind 39002) for transparency
 - Evidence attachments supported (photos, scorecards, witness statements)
@@ -44,6 +46,7 @@ Additionally:
 ## Trade-offs
 
 **Pros**:
+
 - Clear authority (organizers decide)
 - Simple process (easy to understand)
 - Fair (players have right to appeal)
@@ -51,6 +54,7 @@ Additionally:
 - Scalable (works for small and large events)
 
 **Cons**:
+
 - Centralizes decision-making (goes against decentralized ethos)
 - Requires active organizer involvement
 - Can be slow (organizer may be busy)
@@ -72,6 +76,7 @@ Additionally:
 ## Rollback Plan
 
 If organizer gets overwhelmed:
+
 1. Auto-dismiss disputes without evidence (within SLA)
 2. Escalate to tournament committee for major events
 3. Implement peer voting post-MVP
@@ -79,31 +84,35 @@ If organizer gets overwhelmed:
 ## Implementation Plan
 
 ### Phase 1: Challenge Mechanism
+
 - [ ] Add ScoreChallenge model
 - [ ] Create POST /api/scores/{id}/challenge endpoint
 - [ ] Implement 48-hour challenge window
 - [ ] Store challenge reason and evidence
 
 ### Phase 2: Dispute Resolution
+
 - [ ] Create organizer dispute review UI
 - [ ] Implement investigation tools (audit trail viewer)
 - [ ] Create POST /api/disputes/{id}/accept endpoint
 - [ ] Create POST /api/disputes/{id}/dismiss endpoint
 
 ### Phase 3: Appeals
+
 - [ ] Create POST /api/disputes/{id}/appeal endpoint
 - [ ] Implement 7-day appeal window
 - [ ] Route appeals to tournament committee
 - [ ] Create appeal decision endpoint
 
 ### Phase 4: Nostr Publishing
+
 - [ ] Implement kind 39002 (challenge/dispute event)
 - [ ] Publish challenge when created
 - [ ] Publish decision when made
 
 ## Dispute State Machine
 
-```
+```text
 ACCEPTED (score status)
     ↓
     ├─ (Player/marker challenges) ──┐

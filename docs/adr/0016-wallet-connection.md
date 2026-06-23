@@ -13,6 +13,7 @@ Accepted
 Users need to pay registration fees and receive zaps/rewards via Lightning. ADR-0008 (Non-Custodial Payment Design) mandates that the app never custody funds or keys. Nostr Wallet Connect (NIP-47) enables direct wallet communication over Nostr-encrypted messaging.
 
 Wallet integration choices impact:
+
 - User onboarding friction (how easy is it to connect wallet?)
 - Wallet support breadth (how many users have compatible wallets?)
 - Non-custodial guarantees (does the app touch keys?)
@@ -23,6 +24,7 @@ Wallet integration choices impact:
 We will use **Nostr Wallet Connect (NIP-47) as the primary wallet integration**, with **WebLN and BTCPay invoice fallbacks** for compatibility.
 
 Additionally:
+
 - **Connection Method**: QR code for mobile, URI scheme for desktop
 - **Supported Wallets**: Alby, Mutiny, Breez (MVP targets these three)
 - **Permissions Model**: Explicit user approval for spending limits
@@ -42,6 +44,7 @@ Additionally:
 ## Trade-offs
 
 **Pros**:
+
 - NWC is Nostr-native, aligns with ADR-0001 (Nostr identity)
 - Users control their keys in their own wallets
 - Works across different wallet implementations (Alby, Mutiny, etc.)
@@ -50,6 +53,7 @@ Additionally:
 - Non-custodial by design
 
 **Cons**:
+
 - NWC wallet support is still emerging (not all wallets support it yet)
 - Connection setup is multi-step (QR scan → approve → test)
 - Error handling complex (wallet offline, insufficient funds, etc.)
@@ -76,6 +80,7 @@ Additionally:
 ## Rollback Plan
 
 If NWC adoption is low:
+
 1. Emphasize WebLN fallback for MVP
 2. Make BTCPay invoice the primary flow
 3. Post-MVP: Implement LNURL-pay for tips/rewards
@@ -83,24 +88,28 @@ If NWC adoption is low:
 ## Implementation Plan
 
 ### Phase 1: NWC Connection Flow
+
 - [ ] Install `alby-js-sdk` or `nostr-wallet-connect` library
 - [ ] Create wallet connection dialog (QR code + manual URI)
 - [ ] Implement connection persistence (encrypted storage)
 - [ ] Add wallet connection status indicator
 
 ### Phase 2: NWC Payment Flow
+
 - [ ] Implement pay_invoice RPC (send payment)
 - [ ] Implement make_invoice RPC (receive payment)
 - [ ] Create payment request UI
 - [ ] Handle wallet response (success/failure)
 
 ### Phase 3: Fallbacks
+
 - [ ] Add WebLN detection and fallback
 - [ ] Implement BTCPay invoice generation
 - [ ] Create manual payment confirmation UI
 - [ ] Log all payment attempts for reconciliation
 
 ### Phase 4: Testing & UX
+
 - [ ] Test with Alby, Mutiny, Breez
 - [ ] Test connection loss recovery
 - [ ] Test spending limit enforcement

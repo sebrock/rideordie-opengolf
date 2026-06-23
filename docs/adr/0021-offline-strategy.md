@@ -13,6 +13,7 @@ Accepted
 Golf events happen on courses, often with poor or no cellular coverage. Scorekeepers must submit scores offline, then sync when connectivity is restored. PWA offline strategy (ADR-0003) requires deliberate design.
 
 Offline strategy choices impact:
+
 - Event usability (can scorekeeper work offline?)
 - Data consistency (conflicts when offline queue syncs?)
 - User experience (visible indication of sync state?)
@@ -23,18 +24,21 @@ Offline strategy choices impact:
 We will implement **service-worker-based offline scorekeeper workflow** with the following capabilities:
 
 **Offline Capabilities**:
+
 - Submit scores while offline (saved to local IndexedDB)
 - View submitted scores
 - Edit scores before sync
 - View local edit history
 
 **Sync Strategy**:
+
 - Automatic sync when connectivity returns
 - Manual sync button for user control
 - Last-write-wins conflict resolution (local changes override server if older)
 - Exponential backoff for retry
 
 **User Feedback**:
+
 - Sync status indicator in UI
 - Queued scores highlighted (not yet synced)
 - Sync errors shown with retry button
@@ -50,6 +54,7 @@ We will implement **service-worker-based offline scorekeeper workflow** with the
 ## Trade-offs
 
 **Pros**:
+
 - Scorekeeper can work offline reliably
 - Last-write-wins is deterministic (no user prompts)
 - Service worker is transparent (zero learning curve)
@@ -57,6 +62,7 @@ We will implement **service-worker-based offline scorekeeper workflow** with the
 - Works even if user closes tab/browser
 
 **Cons**:
+
 - Last-write-wins can overwrite server changes (mitigated by audit trail)
 - Service worker complexity and debugging challenges
 - Cache invalidation can be tricky
@@ -79,6 +85,7 @@ We will implement **service-worker-based offline scorekeeper workflow** with the
 ## Rollback Plan
 
 If offline sync proves problematic:
+
 1. Disable offline scorekeeper (require online)
 2. Fall back to read-only offline mode (view only, no submit)
 3. Implement simple localStorage fallback (no service worker)
@@ -86,21 +93,25 @@ If offline sync proves problematic:
 ## Implementation Plan
 
 ### Phase 1: Service Worker Setup
+
 - [ ] Create service worker with Workbox
 - [ ] Configure cache strategy (precache critical assets)
 - [ ] Implement offline fallback page
 
 ### Phase 2: Offline Score Queue
+
 - [ ] Create IndexedDB schema for queued scores
 - [ ] Implement offline submit handler (save to IndexedDB)
 - [ ] Create queue management UI (view pending syncs)
 
 ### Phase 3: Sync Engine
+
 - [ ] Implement sync worker (retry loop with backoff)
 - [ ] Handle conflict resolution (last-write-wins)
 - [ ] Add sync status indicator to UI
 
 ### Phase 4: User Experience
+
 - [ ] Add sync progress indicator
 - [ ] Show queued items in list (different styling)
 - [ ] Create manual sync button

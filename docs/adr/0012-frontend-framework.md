@@ -13,6 +13,7 @@ Accepted
 The PWA client (ADR-0003) must support Nostr identity signing, real-time score submission and attestation, offline scorekeeper workflows, and responsive mobile-first UI. The frontend should share the same language/tooling as the backend to reduce cognitive load.
 
 Frontend framework choices impact:
+
 - PWA capabilities and offline support
 - Nostr library availability
 - Service worker integration complexity
@@ -24,6 +25,7 @@ Frontend framework choices impact:
 We will use **React 18.x with TypeScript** as the PWA frontend framework.
 
 Additionally:
+
 - **Build Tool**: Vite (not webpack or Next.js) for fast development and production builds
 - **UI Component Library**: shadcn/ui + Tamagui for accessible, composable components
 - **State Management**: Redux Toolkit (or Zustand if simpler state model emerges)
@@ -42,6 +44,7 @@ Additionally:
 ## Trade-offs
 
 **Pros**:
+
 - React has the largest Nostr/Bitcoin developer community
 - TypeScript + React is well-understood, strong hiring pool
 - Vite is exceptionally fast (10x faster dev builds than webpack)
@@ -51,6 +54,7 @@ Additionally:
 - Hot Module Replacement (HMR) with Vite is excellent for rapid iteration
 
 **Cons**:
+
 - React ecosystem can be overwhelming (many choices for state, routing, UI)
 - Bundle size requires careful splitting (tree-shaking, code splitting)
 - Service worker complexity can grow quickly with offline features
@@ -80,6 +84,7 @@ Additionally:
 ## Rollback Plan
 
 If React/Vite complexity becomes a blocker:
+
 1. Migrate to Preact (drop-in replacement, smaller bundle)
 2. Migrate to Vue.js (similar reactive model, good ecosystem)
 3. Simplify state management (Zustand instead of Redux Toolkit)

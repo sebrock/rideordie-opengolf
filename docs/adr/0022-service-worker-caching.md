@@ -13,6 +13,7 @@ Accepted
 Service worker caching strategy (ADR-0021) requires careful management to balance offline availability with freshness. Workbox is a library that simplifies service worker development with battle-tested patterns.
 
 Cache management choices impact:
+
 - App startup time (precaching vs lazy loading)
 - Asset freshness (cache staleness)
 - Disk usage (storage quota management)
@@ -23,6 +24,7 @@ Cache management choices impact:
 We will use **Workbox for service worker asset precaching and cache management**.
 
 Additionally:
+
 - **Precaching Strategy**: Critical shell assets only (HTML, core JS, CSS)
 - **API Caching**: NetworkFirst (try server, fall back to cache)
 - **Asset Caching**: StaleWhileRevalidate (serve cached, update in background)
@@ -38,6 +40,7 @@ Additionally:
 ## Trade-offs
 
 **Pros**:
+
 - Workbox handles cache versioning automatically (build hash)
 - Precaching strategy is simple configuration
 - Excellent error handling and fallbacks
@@ -45,6 +48,7 @@ Additionally:
 - Works with Vite build system
 
 **Cons**:
+
 - Adds ~18KB gzipped (manageable)
 - Service worker debugging still challenging
 - Cache invalidation can be tricky
@@ -65,23 +69,27 @@ Additionally:
 ## Rollback Plan
 
 If Workbox causes issues:
+
 1. Fall back to manual service worker (same cache strategies)
 2. Disable service worker entirely (loose offline functionality)
 
 ## Implementation Plan
 
 ### Phase 1: Workbox Integration
+
 - [ ] Install @vite-pwa/vite plugin
 - [ ] Configure precache manifest
 - [ ] Enable automatic service worker generation
 
 ### Phase 2: Cache Strategies
+
 - [ ] Configure NetworkFirst for API routes
 - [ ] Configure CacheFirst for static assets
 - [ ] Configure StaleWhileRevalidate for HTML
 - [ ] Set cache expiration policies
 
 ### Phase 3: Testing
+
 - [ ] Test precache loading
 - [ ] Test offline fallback
 - [ ] Test cache invalidation on update

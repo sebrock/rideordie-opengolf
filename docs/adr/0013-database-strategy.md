@@ -11,6 +11,7 @@ Accepted
 ## Context
 
 The backend must durably store:
+
 - User identities and roles (Nostr pubkeys, permissions)
 - Score submissions and revisions (audit trail required)
 - Score attestations and disputes (who attested, when, outcome)
@@ -18,6 +19,7 @@ The backend must durably store:
 - Events and metadata (courses, tournaments, participants)
 
 Database choice impacts:
+
 - Query complexity for audit trails and temporal data
 - Ability to enforce referential integrity (payment → user → attestation)
 - Transactional guarantees for financial correctness
@@ -29,6 +31,7 @@ Database choice impacts:
 We will use **PostgreSQL 15+ as the primary database** with **Prisma.io as the ORM**.
 
 Additionally:
+
 - **Managed Provider**: Supabase (recommended for MVP) or Railway/Render
 - **Migrations**: Prisma migrate for schema versioning and rollback
 - **Backups**: Daily automated backups managed by provider
@@ -46,6 +49,7 @@ Additionally:
 ## Trade-offs
 
 **Pros**:
+
 - PostgreSQL's JSONB column type allows flexible Nostr event storage alongside structured data
 - Strong window functions and temporal query support for audit trails
 - Foreign keys and constraints enforce data integrity (critical for payments)
@@ -56,6 +60,7 @@ Additionally:
 - ACID transactions guarantee payment correctness
 
 **Cons**:
+
 - Slightly more operational complexity than MongoDB for simple use cases (not applicable with managed services)
 - Requires thoughtful schema design upfront (good practice anyway)
 - Pricing can scale with data size (mitigated for MVP with managed providers)
@@ -80,6 +85,7 @@ Additionally:
 ## Rollback Plan
 
 If PostgreSQL becomes a blocker:
+
 1. Migrate to SQLite for development, scale to PostgreSQL later
 2. Use Firebase/Firestore if schema flexibility becomes critical issue
 3. Keep Prisma ORM (works with multiple databases)

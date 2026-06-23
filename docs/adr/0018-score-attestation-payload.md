@@ -13,6 +13,7 @@ Accepted
 Score submissions and attestations are core to the platform. Scores must be published to Nostr relays to create an immutable, decentralized audit trail. The project must decide which Nostr event structure and NIP to use.
 
 Nostr event design choices impact:
+
 - Interoperability with other Nostr apps (should we use standard NIPs?)
 - Event discoverability on relays (which filters to use?)
 - Data integrity (how to prevent tampering?)
@@ -24,6 +25,7 @@ Nostr event design choices impact:
 We will use **custom Nostr event kinds** (39000-39999 range) for score submission and attestation, rather than forcing compatibility with existing NIPs.
 
 Additionally:
+
 - **Score Submission**: Kind 39000
 - **Score Attestation**: Kind 39001
 - **Score Challenge/Dispute**: Kind 39002
@@ -42,6 +44,7 @@ Additionally:
 ## Trade-offs
 
 **Pros**:
+
 - Custom kinds give maximum flexibility for score data structure
 - No compatibility constraints from existing NIPs
 - Clear semantics: kind 39000 = score submission, kind 39001 = attestation
@@ -50,6 +53,7 @@ Additionally:
 - Future Nostr apps can integrate if they adopt the kinds
 
 **Cons**:
+
 - Less interoperability than standard NIPs
 - Future changes require migration planning
 - Other Nostr apps won't understand the events without explicit support
@@ -72,6 +76,7 @@ Additionally:
 ## Rollback Plan
 
 If custom kinds cause relay compatibility issues:
+
 1. Migrate to NIP-23 (long-form) for detailed scores
 2. Use kind 1 (note) as fallback with structured JSON payload
 3. Keep current database schema (independent of Nostr format)

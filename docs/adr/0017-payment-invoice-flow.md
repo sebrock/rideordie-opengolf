@@ -13,6 +13,7 @@ Accepted
 Registration fees must be collected from event participants. ADR-0008 (Non-Custodial Payment Design) mandates that the app does NOT custody funds. BTCPay Server is a Nostr-friendly, self-hosted or managed Bitcoin payment processor that generates invoices and tracks payment state without custodying funds.
 
 Payment infrastructure choices impact:
+
 - Non-custodial guarantees (does processor custody funds?)
 - Operational burden (self-hosted vs managed)
 - Payment state tracking (can we reconcile who paid?)
@@ -24,6 +25,7 @@ Payment infrastructure choices impact:
 We will use **BTCPay Server as the invoice generator and payment state tracker** for registration fees and organizer payouts.
 
 Additionally:
+
 - **Deployment**: Managed BTCPay (Voltage, LNBits, or self-hosted if ops capacity)
 - **Payment Method**: On-chain Bitcoin (immediate) + Lightning (optional)
 - **Invoice Workflow**: Generate → user pays → webhook confirmation
@@ -42,6 +44,7 @@ Additionally:
 ## Trade-offs
 
 **Pros**:
+
 - Fully non-custodial: Funds go directly to organizer wallet
 - Open-source: Full transparency and auditability
 - Bitcoin + Lightning support: Users can pay however they prefer
@@ -51,6 +54,7 @@ Additionally:
 - Nostr-friendly: Can integrate Nostr signing if needed
 
 **Cons**:
+
 - Operational complexity if self-hosted (requires DevOps)
 - Managed services add cost (Voltage ~$20/mo)
 - Users need to understand Bitcoin/Lightning (onboarding friction)
@@ -78,6 +82,7 @@ Additionally:
 ## Rollback Plan
 
 If BTCPay becomes a blocker:
+
 1. Fall back to LNBits (simpler, less feature-rich)
 2. Generate invoices manually (worst case, requires organizer copy/paste)
 3. Defer payment collection to post-MVP
@@ -85,18 +90,21 @@ If BTCPay becomes a blocker:
 ## Implementation Plan
 
 ### Phase 1: BTCPay Setup
+
 - [ ] Deploy BTCPay Server (Voltage for managed, or self-host)
 - [ ] Create store in BTCPay
 - [ ] Generate API key
 - [ ] Configure webhook endpoint (app.example.com/webhooks/btcpay)
 
 ### Phase 2: Invoice Generation
+
 - [ ] Create endpoint: POST /api/registrations/checkout
 - [ ] Call BTCPay CreateInvoice API
 - [ ] Store invoice ID in database (PENDING state)
 - [ ] Return invoice URL to user
 
 ### Phase 3: Payment Confirmation
+
 - [ ] Implement webhook handler: POST /webhooks/btcpay
 - [ ] Verify webhook signature
 - [ ] Update invoice state in database (CONFIRMED)
@@ -104,6 +112,7 @@ If BTCPay becomes a blocker:
 - [ ] Publish Nostr event (user registered)
 
 ### Phase 4: State Reconciliation
+
 - [ ] Implement invoice status checker (background job)
 - [ ] Poll BTCPay for expired/unpaid invoices
 - [ ] Remind users to pay (send notifications)

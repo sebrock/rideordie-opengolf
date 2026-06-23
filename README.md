@@ -597,3 +597,110 @@ The immediate priorities are:
 4. Start Sprint 0 project foundation work.
 5. Move from planning artifacts into working prototypes.
 
+<!-- pitch-deck:start -->
+## Pitch Deck
+
+The **Ride or Die Scorecard** pitch deck explains the project vision, open-source strategy, product scope, technical architecture, roadmap, and call for builders/sponsors.
+
+### Slide-by-slide table of contents
+
+| # | Slide | Full-size image |
+|---:|---|---|
+| 1 | [Introduction](#1-introduction) | [slide-01.png](./img/deck/slide-01.png) |
+| 2 | [Executive Summary](#2-executive-summary) | [slide-02.png](./img/deck/slide-02.png) |
+| 3 | [Vision, Mission & Objectives](#3-vision-mission--objectives) | [slide-03.png](./img/deck/slide-03.png) |
+| 4 | [Governance](#4-governance) | [slide-04.png](./img/deck/slide-04.png) |
+| 5 | [Roles](#5-roles) | [slide-05.png](./img/deck/slide-05.png) |
+| 6 | [Product & UX](#6-product--ux) | [slide-06.png](./img/deck/slide-06.png) |
+| 7 | [Sponsorship & Contributors](#7-sponsorship--contributors) | [slide-07.png](./img/deck/slide-07.png) |
+| 8 | [Technical Architecture](#8-technical-architecture) | [slide-08.png](./img/deck/slide-08.png) |
+| 9 | [Data Architecture](#9-data-architecture) | [slide-09.png](./img/deck/slide-09.png) |
+| 10 | [Security, Privacy & Accessibility](#10-security-privacy--accessibility) | [slide-10.png](./img/deck/slide-10.png) |
+| 11 | [Roadmap & MVP](#11-roadmap--mvp) | [slide-11.png](./img/deck/slide-11.png) |
+| 12 | [Backlog Themes](#12-backlog-themes) | [slide-12.png](./img/deck/slide-12.png) |
+| 13 | [Risks & Open Decisions](#13-risks--open-decisions) | [slide-13.png](./img/deck/slide-13.png) |
+| 14 | [Pre-Event Engagement](#14-pre-event-engagement) | [slide-14.png](./img/deck/slide-14.png) |
+| 15 | [Light Wallet & Course Maintenance](#15-light-wallet--course-maintenance) | [slide-15.png](./img/deck/slide-15.png) |
+| 16 | [Join the Build](#16-join-the-build) | [slide-16.png](./img/deck/slide-16.png) |
+
+### Deck gallery
+
+<table>
+  <tr>
+    <td width="25%" align="center"><a href="./img/deck/slide-01.png"><img src="./img/deck/thumbs/slide-01.png" alt="Slide 1 - Introduction" width="100%"></a><br><strong>1. Introduction</strong></td>
+    <td width="25%" align="center"><a href="./img/deck/slide-02.png"><img src="./img/deck/thumbs/slide-02.png" alt="Slide 2 - Executive Summary" width="100%"></a><br><strong>2. Executive Summary</strong></td>
+    <td width="25%" align="center"><a href="./img/deck/slide-03.png"><img src="./img/deck/thumbs/slide-03.png" alt="Slide 3 - Vision, Mission and Objectives" width="100%"></a><br><strong>3. Vision & Mission</strong></td>
+    <td width="25%" align="center"><a href="./img/deck/slide-04.png"><img src="./img/deck/thumbs/slide-04.png" alt="Slide 4 - Governance" width="100%"></a><br><strong>4. Governance</strong></td>
+  </tr>
+  <tr>
+    <td width="25%" align="center"><a href="./img/deck/slide-05.png"><img src="./img/deck/thumbs/slide-05.png" alt="Slide 5 - Roles" width="100%"></a><br><strong>5. Roles</strong></td>
+    <td width="25%" align="center"><a href="./img/deck/slide-06.png"><img src="./img/deck/thumbs/slide-06.png" alt="Slide 6 - Product and UX" width="100%"></a><br><strong>6. Product & UX</strong></td>
+    <td width="25%" align="center"><a href="./img/deck/slide-07.png"><img src="./img/deck/thumbs/slide-07.png" alt="Slide 7 - Sponsorship and Contributors" width="100%"></a><br><strong>7. Sponsorship</strong></td>
+    <td width="25%" align="center"><a href="./img/deck/slide-08.png"><img src="./img/deck/thumbs/slide-08.png" alt="Slide 8 - Technical Architecture" width="100%"></a><br><strong>8. Technical Architecture</strong></td>
+  </tr>
+  <tr>
+    <td width="25%" align="center"><a href="./img/deck/slide-09.png"><img src="./img/deck/thumbs/slide-09.png" alt="Slide 9 - Data Architecture" width="100%"></a><br><strong>9. Data Architecture</strong></td>
+    <td width="25%" align="center"><a href="./img/deck/slide-10.png"><img src="./img/deck/thumbs/slide-10.png" alt="Slide 10 - Security, Privacy and Accessibility" width="100%"></a><br><strong>10. Security & Privacy</strong></td>
+    <td width="25%" align="center"><a href="./img/deck/slide-11.png"><img src="./img/deck/thumbs/slide-11.png" alt="Slide 11 - Roadmap and MVP" width="100%"></a><br><strong>11. Roadmap & MVP</strong></td>
+    <td width="25%" align="center"><a href="./img/deck/slide-12.png"><img src="./img/deck/thumbs/slide-12.png" alt="Slide 12 - Backlog Themes" width="100%"></a><br><strong>12. Backlog Themes</strong></td>
+  </tr>
+  <tr>
+    <td width="25%" align="center"><a href="./img/deck/slide-13.png"><img src="./img/deck/thumbs/slide-13.png" alt="Slide 13 - Risks and Open Decisions" width="100%"></a><br><strong>13. Risks & Decisions</strong></td>
+    <td width="25%" align="center"><a href="./img/deck/slide-14.png"><img src="./img/deck/thumbs/slide-14.png" alt="Slide 14 - Pre-Event Engagement" width="100%"></a><br><strong>14. Pre-Event Engagement</strong></td>
+    <td width="25%" align="center"><a href="./img/deck/slide-15.png"><img src="./img/deck/thumbs/slide-15.png" alt="Slide 15 - Light Wallet and Course Maintenance" width="100%"></a><br><strong>15. Wallet & Course Data</strong></td>
+    <td width="25%" align="center"><a href="./img/deck/slide-16.png"><img src="./img/deck/thumbs/slide-16.png" alt="Slide 16 - Join the Build" width="100%"></a><br><strong>16. Join the Build</strong></td>
+  </tr>
+</table>
+
+### Full slide image links
+
+Each thumbnail below links to the full-resolution slide image.
+
+#### 1. Introduction
+[![Slide 1 - Introduction](./img/deck/thumbs/slide-01.png)](./img/deck/slide-01.png)
+
+#### 2. Executive Summary
+[![Slide 2 - Executive Summary](./img/deck/thumbs/slide-02.png)](./img/deck/slide-02.png)
+
+#### 3. Vision, Mission & Objectives
+[![Slide 3 - Vision, Mission and Objectives](./img/deck/thumbs/slide-03.png)](./img/deck/slide-03.png)
+
+#### 4. Governance
+[![Slide 4 - Governance](./img/deck/thumbs/slide-04.png)](./img/deck/slide-04.png)
+
+#### 5. Roles
+[![Slide 5 - Roles](./img/deck/thumbs/slide-05.png)](./img/deck/slide-05.png)
+
+#### 6. Product & UX
+[![Slide 6 - Product and UX](./img/deck/thumbs/slide-06.png)](./img/deck/slide-06.png)
+
+#### 7. Sponsorship & Contributors
+[![Slide 7 - Sponsorship and Contributors](./img/deck/thumbs/slide-07.png)](./img/deck/slide-07.png)
+
+#### 8. Technical Architecture
+[![Slide 8 - Technical Architecture](./img/deck/thumbs/slide-08.png)](./img/deck/slide-08.png)
+
+#### 9. Data Architecture
+[![Slide 9 - Data Architecture](./img/deck/thumbs/slide-09.png)](./img/deck/slide-09.png)
+
+#### 10. Security, Privacy & Accessibility
+[![Slide 10 - Security, Privacy and Accessibility](./img/deck/thumbs/slide-10.png)](./img/deck/slide-10.png)
+
+#### 11. Roadmap & MVP
+[![Slide 11 - Roadmap and MVP](./img/deck/thumbs/slide-11.png)](./img/deck/slide-11.png)
+
+#### 12. Backlog Themes
+[![Slide 12 - Backlog Themes](./img/deck/thumbs/slide-12.png)](./img/deck/slide-12.png)
+
+#### 13. Risks & Open Decisions
+[![Slide 13 - Risks and Open Decisions](./img/deck/thumbs/slide-13.png)](./img/deck/slide-13.png)
+
+#### 14. Pre-Event Engagement
+[![Slide 14 - Pre-Event Engagement](./img/deck/thumbs/slide-14.png)](./img/deck/slide-14.png)
+
+#### 15. Light Wallet & Course Maintenance
+[![Slide 15 - Light Wallet and Course Maintenance](./img/deck/thumbs/slide-15.png)](./img/deck/slide-15.png)
+
+#### 16. Join the Build
+[![Slide 16 - Join the Build](./img/deck/thumbs/slide-16.png)](./img/deck/slide-16.png)
+<!-- pitch-deck:end -->

@@ -57,7 +57,7 @@ Every ADR should include:
 | ADR | Title | Status | Category | Implementation Impact |
 |---:|---|---|---|---|
 | 0000 | ADR template | Template | Process | Defines the required ADR structure. |
-| 0001 | Use Nostr for identity and signed user actions | Proposed | Identity / Nostr | Establishes Nostr pubkeys as the primary identity anchor. |
+| 0001 | Use Nostr for identity and signed user actions | Accepted | Identity / Nostr | Establishes Nostr pubkeys as the primary identity anchor. |
 | 0002 | Use Nostr Wallet Connect for non-custodial Lightning wallet integration | Proposed | Wallet / Payments | Establishes the wallet integration direction for fees, zaps, and rewards. |
 | 0003 | Build the app as a Progressive Web App | Proposed | Client / UX | Establishes PWA-first delivery across mobile, tablet, and desktop clients. |
 | 0004 | Use open-source-only dependencies and mandatory license review gates | Proposed | Governance / Licensing | Establishes dependency intake and license-review rules. |

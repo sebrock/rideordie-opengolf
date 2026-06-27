@@ -13,3 +13,4 @@ ride_or_die_github_wsl_issue_scripts/scripts/03_create_issues_from_csv.py
 ride_or_die_github_wsl_issue_scripts/scripts/04_run_all_wsl.sh
 ride_or_die_github_wsl_issue_scripts/scripts/05_dry_run_issues.sh
 ride_or_die_github_wsl_issue_scripts/scripts/06_fix_line_endings.sh
+Modelfile.qwen-coder

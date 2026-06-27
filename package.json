@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "@prisma/client": "latest",
+    "@prisma/adapter-pg": "latest",
+    "dotenv": "latest",
+    "express": "latest",
+    "pg": "latest"
+  },
+  "devDependencies": {
+    "@types/pg": "latest",
+    "prisma": "latest",
+    "typescript": "latest",
+    "tsx": "latest"
+  }
+}

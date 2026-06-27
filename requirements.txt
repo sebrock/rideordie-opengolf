@@ -1,0 +1,5 @@
+# Optional Python developer tooling only.
+# Core project dependencies belong in package.json / pnpm-lock.yaml.
+# macOS system dependencies belong in Brewfile.
+
+aider-install

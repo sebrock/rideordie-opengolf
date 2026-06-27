@@ -1,722 +1,424 @@
 # Ride or Die Scorecard
 
-**Ride or Die Scorecard is a Nostr-native, Bitcoin-powered golf event platform.**
+**Ride or Die Scorecard** is an open-source, Nostr-native, Bitcoin-powered golf event platform, starting with the **Ride or Die Cup**.
 
-The first deployment is the **Ride or Die Cup**: an on-site team golf tournament where players, scorekeepers, fans, sponsors, and developers interact through one open-source Progressive Web App.
+The goal is simple: replace scattered spreadsheets, chats, manual payment reconciliation, and fragile score tracking with a field-ready PWA that can register players, manage teams, coordinate Bitcoin/Lightning fees, record scores, capture attestations, publish standings, and leave reusable event software behind.
 
-The larger thesis is simple:
-
-> Sporting events should not depend on closed scoring systems, proprietary identity, custodial payment rails, or locked-down event software.
->
-> Ride or Die Scorecard explores what happens when event management, scoring, identity, rewards, and fan engagement are rebuilt around open protocols: **Nostr, Bitcoin, Lightning, open maps, and open data**.
-
-This is not just a golf scorecard. It is a reference implementation for decentralized, community-owned event infrastructure.
+> Current source of truth: **foundation document v0.4.1 - Nostash onboarding update** and the **foundation deck v0.4.1**. This repository is in implementation-prep mode: governance, ADRs, issue scaffolding, deck assets, and planning docs exist; generated ADRs and proposed stack decisions still need project-owner review before being treated as binding.
 
 ---
 
-## Project Thesis
+## Project Status
 
-Most amateur and semi-professional sporting events still run on a fragile mix of spreadsheets, chat groups, manual scorecards, proprietary tournament tools, and disconnected payment flows.
+The project has moved from concept planning into executable scaffolding.
 
-Ride or Die Scorecard aims to prove a different model:
-
-1. **Identity should be portable.**
-   Participants should be able to use Nostr identities instead of platform-owned accounts.
-
-2. **Payments should be Bitcoin-native.**
-   Registration fees, zaps, rewards, and sponsorship contributions should flow through Bitcoin and Lightning, preferably through non-custodial wallet connections.
-
-3. **Event data should be open and composable.**
-   Scores, achievements, course data, public updates, and attestations should be structured so other clients and services can build on top.
-
-4. **The app should be usable at a real tournament.**
-   This is not a protocol demo. The first target is a working golf event with registration, scorekeeping, live updates, and operational reliability.
-
-5. **The stack should be open source by default.**
-   Core components should avoid proprietary lock-in. Any dependency should be reviewed for license compatibility and long-term project fit.
-
----
-
-## What We Are Building
-
-Ride or Die Scorecard is a **Progressive Web App** for running and following a golf tournament.
-
-At its core, the app combines:
-
-- **Nostr identity** for players, team managers, scorers, organizers, and fans
-- **Tournament registration** with team and player management
-- **Bitcoin/Lightning payments** for fees, zaps, and rewards
-- **Non-custodial wallet connectivity** through Nostr Wallet Connect / NIP-47 where feasible
-- **Live golf scoring** for the on-site event
-- **Pre-event qualification scoring** for players practicing at home courses
-- **Peer or marker attestations** for submitted practice scores
-- **Achievements, badges, and points** to increase engagement
-- **Course data ingestion, correction, enrichment, and ratings**
-- **Open-source, contributor-friendly development process**
+| Area | Current state |
+| --- | --- |
+| Product thesis | Stable: Ride or Die Scorecard is the platform; Ride or Die Cup is the first deployment. |
+| Foundation document | Updated to v0.4.1 with Nostash onboarding, signer abstraction, Sprint 1 direction, and ADR status correction. |
+| Pitch deck | Updated to v0.4.1 and rendered into README-ready images and thumbnails. |
+| ADRs | ADRs 0001-0022 are represented. ADRs 0011-0022 should remain **Proposed** until reviewed. |
+| Repo scaffolding | README, contribution docs, issue templates, PR template, ADR index, course-data registry, CI placeholder, and support/security docs are expected assets. |
+| Implementation posture | Ready for Sprint 0 reconciliation and Sprint 1 kickoff after the live repo confirms committed assets, ADR status, issue import, and CI replacement commands. |
 
 ---
 
 ## MVP Definition
 
-The MVP should prove that the Ride or Die Cup can run on open, Bitcoin-native, Nostr-native software.
+A successful MVP lets a real golf event complete the core tournament loop:
 
-The MVP is successful if organizers can register players, assign teams, collect Lightning-based fee contributions, appoint scorers, record scores, show live standings, and publish public updates in a way that is usable at the real event.
+1. A participant enters as a guest and can browse public event information.
+2. A player registers or is manually registered by an organizer.
+3. A player joins or is assigned to a team.
+4. Required fees or contributions are tracked through Bitcoin/Lightning payment status.
+5. Scorekeepers and markers can enter, review, and attest scores.
+6. Standings are visible in a responsive PWA during the event.
+7. Score changes, role changes, attestations, disputes, and admin overrides are auditable.
 
-### MVP Must Have
+### MVP Includes
 
-#### 1. Nostr-Based Identity
+- Guest-first PWA shell
+- Nostr identity association
+- NIP-07 signer detection
+- Nostash onboarding for iOS/iPadOS Safari
+- Signed authentication challenge
+- Registration and team flows
+- Organizer/admin view
+- Course baseline and scorekeeper workflow
+- Score attestations and dispute handling
+- Bitcoin/Lightning payment-status tracking
+- Accessibility baseline
+- Operational logs and exportable data
 
-Users can sign in or identify themselves using a Nostr public key.
+### Not MVP
 
-The MVP should support:
-
-- Nostr public key based user identity
-- Basic profile display
-- Role assignment for organizers, players, team managers, scorers, and fans
-- Linking a participant record to a Nostr identity
-
-#### 2. Tournament Registration
-
-Players and teams can be registered for the Ride or Die Cup.
-
-The MVP should support:
-
-- Player registration
-- Team assignment
-- Team manager role
-- Organizer review and correction
-- Participant list export or admin view
-
-#### 3. Bitcoin/Lightning Fee Contribution
-
-Players can contribute tournament fees using Bitcoin/Lightning.
-
-The MVP should support:
-
-- Payment request generation
-- Payment status tracking
-- Registration status update after payment confirmation
-- Basic admin visibility into paid/unpaid participants
-
-Preferred direction:
-
-- Use BTCPay Server or another open-source Bitcoin payment component
-- Use Nostr Wallet Connect / NIP-47 where practical
-- Keep the app non-custodial: the app must not hold user funds, seed phrases, or raw private keys
-
-#### 4. Scorekeeper Workflow
-
-App usage does not need to be mandatory for every player. A dedicated scorekeeper can be appointed to track scores.
-
-The MVP should support:
-
-- Scorekeeper role
-- Hole-by-hole score entry
-- Score editing with audit trail
-- Basic validation checks
-- Submission confirmation
-
-#### 5. Live Scoreboard
-
-Fans, players, and organizers can follow tournament progress.
-
-The MVP should support:
-
-- Team standings
-- Match or round status
-- Live updates from score submissions
-- Public read-only scoreboard view
-
-#### 6. Course Data Baseline
-
-The app needs enough course data to support the inaugural tournament and future expansion.
-
-The MVP should support:
-
-- Manual course creation
-- Basic course fields: name, location, holes, par, tee information where available
-- Import path for OpenStreetMap-derived data or other openly licensed datasets
-- Source attribution and license tracking
-- User correction and enrichment proposals
-- Review status for submitted course data changes
-
-#### 7. Progressive Web App
-
-The app should work across common client types without requiring app-store distribution.
-
-The MVP should support:
-
-- Mobile browser usage
-- Desktop browser usage
-- Installable PWA behavior where feasible
-- Responsive design
-- Offline-tolerant score entry direction, even if full offline sync is post-MVP
-
-#### 8. Accessibility Baseline
-
-The MVP should be usable by a broad set of users.
-
-The MVP should include:
-
-- Keyboard navigation support
-- Sufficient contrast
-- Screen-reader friendly form labels
-- Clear error messages
-- Avoidance of color-only status indicators
-
----
-
-## MVP Should Have
-
-These features are valuable for the first release, but should not block the core tournament flow if delivery pressure increases.
-
-- Pre-event practice score submission
-- Peer or marker attestation for practice scores
-- Team points from pre-event qualification activity
-- Nostr badges or achievement records
-- Zap-enabled public score posts
-- Basic course ratings
-- User-submitted course data corrections
-- Sponsor visibility modules
-- Simple export for event reports
-
----
-
-## Post-MVP Ideas
-
-These are important but should remain outside the first production-critical scope unless capacity allows.
-
-- Betting or prediction markets
-- Advanced achievement economy
-- Rich social feed around score events
-- Automated handicap or difficulty normalization
-- Global course data federation
-- Full offline-first scoring
-- Multi-event and multi-sport support
 - Native mobile apps
-- Advanced sponsor dashboards
-- Public APIs for third-party clients
-
-Any betting or prediction-market functionality requires separate legal and compliance review before implementation.
-
----
-
-## User Roles
-
-### Organizer / Admin
-
-Runs the event, manages users, teams, payments, schedule, and operational readiness.
-
-### Product Manager
-
-Maintains vision, MVP scope, roadmap, backlog, user stories, and prioritization.
-
-### Player
-
-Registers for the tournament, contributes fees, plays rounds, submits or confirms scores, earns points or badges.
-
-### Team Manager
-
-Coordinates a team, checks roster status, monitors team progress, and supports player communication.
-
-### Scorekeeper
-
-Records official scores during the event and submits score updates to the system.
-
-### Marker / Attester
-
-Confirms that a player-submitted pre-event score is accurate.
-
-### Fan / Spectator
-
-Follows live scores, zaps posts, views achievements, and engages with public event updates.
-
-### Sponsor / Partner
-
-Provides money, services, infrastructure, prizes, or technical support in exchange for visibility and ecosystem alignment.
-
-### Developer / Contributor
-
-Builds, reviews, tests, documents, and improves the open-source platform.
-
-### UX Specialist
-
-Ensures the app is simple, accessible, and usable under real tournament conditions.
-
-### QA / Tester
-
-Tests workflows, edge cases, device compatibility, score correctness, payment status handling, and event readiness.
+- Custodial balances
+- Asking users to paste raw `nsec` private keys
+- Full social-client functionality
+- Global course-data coverage
+- Unmoderated scoring-critical course edits
+- Betting or prediction markets
 
 ---
 
-## Core Product Areas
+## Product Principles
 
-### Identity
-
-- Nostr login and profile association
-- Role management
-- Permission boundaries
-- Key and session handling
-
-### Registration
-
-- Player registration
-- Team management
-- Fee status
-- Admin review
-
-### Payments and Wallets
-
-- Bitcoin/Lightning fee contributions
-- Nostr Wallet Connect / NIP-47 support
-- Zaps for public posts
-- Rewards and sats distribution direction
-- Non-custodial architecture
-
-### Scoring
-
-- Hole-by-hole score entry
-- Scorekeeper workflow
-- Score corrections
-- Live standings
-- Score history and auditability
-
-### Pre-Event Qualification
-
-- Practice score submission
-- Home-course participation
-- Peer or marker attestation
-- Team points
-- Badges and achievements
-
-### Course Data
-
-- Course import
-- Course normalization
-- Course correction proposals
-- Community enrichment
-- Ratings and quality signals
-- Source/license tracking
-- Contributor provenance and review status
-
-### Fan Engagement
-
-- Public scoreboard
-- Score posts
-- Zaps
-- Achievements
-- Event updates
-
-### Sponsorship
-
-- Sponsor visibility
-- Infrastructure sponsorship
-- Prize sponsorship
-- Service contributions from Bitcoin/Nostr ecosystem projects
+| Principle | Meaning |
+| --- | --- |
+| Open source first | Core code, docs, scripts, and runtime dependencies should be open source unless an exception passes review. |
+| Bitcoin only | Fees, contributions, rewards, and payment flows use Bitcoin. Lightning is preferred for UX. |
+| Nostr native | Public keys, signed events, and relay publishing are part of the product architecture, not a bolt-on. |
+| Non-custodial | The app coordinates payment intent/status and signing requests. It does not hold seed phrases, raw private keys, or user funds. |
+| Guest first | Normal users can browse before learning anything about Nostr. Signing unlocks participation. |
+| Scorekeeper first | The tournament must work even if some players never install or use the app. |
+| Accessibility by default | Mobile, keyboard, screen-reader, contrast, focus, touch-target, and error states matter from Sprint 1. |
+| No vendor lock-in | Services should sit behind adapters and have documented fallbacks where practical. |
 
 ---
 
-## Repository Setup
+## Nostr Onboarding
 
-This repository should contain the core application code plus project governance material.
+The v0.4.1 direction adds the missing normie on-ramp: **guests first, signing later**.
 
-Recommended structure:
+Users should not be forced to understand relays, NIPs, keys, or wallet protocols before they can see the event. The PWA should allow public browsing first, then ask for secure signing only when the user takes a meaningful action.
 
-```text
-.github/
-  ISSUE_TEMPLATE/
-    bug_report.yml
-    feature_request.yml
-    license_review.yml
-    security_report.yml
-    ux_review.yml
-README.md
-CONTRIBUTING.md
-CODE_OF_CONDUCT.md
-SECURITY.md
-SUPPORT.md
+### Guest-access actions
+
+- Browse the Cup homepage
+- View schedule and venue information
+- View public course information
+- View public standings and announcements
+- Read sponsor and contributor information
+
+### Signer-gated actions
+
+- Join or register
+- Submit profile or roster information
+- Enter or attest scores
+- Publish event updates
+- Claim a role, badge, reward, or identity-linked status
+- Use encrypted/private features
+
+### iOS/iPadOS Safari path: Nostash
+
+[Nostash](https://github.com/tyiu/nostash) is the guided iPhone/iPad Safari path for NIP-07 signing.
+
+Recommended UX copy:
+
+> Your key stays on your device. Ride or Die asks your signer to approve actions. We never see your private key.
+
+Expected flow:
+
+1. User browses as a guest.
+2. User taps a gated action such as **Join**, **Register**, **Attest**, or **Publish**.
+3. The PWA checks for `window.nostr`.
+4. If `window.nostr` is missing on iOS/iPadOS Safari, show the Nostash install/enable modal.
+5. User installs Nostash, opens it once, enables the Safari extension, returns, and taps **Connect**.
+6. The app requests the public key and signs a server-issued auth challenge.
+7. The server verifies the signature and opens role-appropriate features.
+
+Implementation notes:
+
+- Do not ask normal users to paste raw `nsec` keys.
+- Keep NIP-07 as the MVP browser-signer adapter.
+- Keep NIP-46 remote signing and NIP-55 Android signing staged behind the same internal signer interface.
+- Detect NIP-44 encryption support before exposing encrypted/private features.
+- Explicitly test iOS Home Screen PWA mode. If the signer is unavailable there, show **Open in Safari to connect securely**.
+
+---
+
+## Technical Architecture
+
+The proposed implementation stack is coherent but should remain reviewable through ADRs before being locked in.
+
+| Layer | Proposed direction |
+| --- | --- |
+| Frontend | React + Vite installable PWA, mobile-first scorekeeper UX, accessibility tests, Workbox service worker, IndexedDB offline queue. |
+| Backend | Node.js + Express + TypeScript APIs for registration, teams, roles, score state, payment state, audit logs, and admin workflows. |
+| Database | PostgreSQL as the MVP operational source of truth, with Prisma as the ORM. |
+| Nostr | NIP-07 signer adapter, signed auth challenge, relay publishing, score/attestation event schemas, future NIP-46/NIP-55 fallback paths. |
+| Payments | Bitcoin only. Lightning-first UX through NWC/NIP-47 direction, with BTCPay Server for invoices/reconciliation and adapter-based fallbacks. |
+| Course data | Provenance-aware registry and normalized course/hole/tee records, with moderated corrections and organizer-approved scoring data separated from public suggestions. |
+| Offline | Workbox + IndexedDB queue for scorekeeper behavior under weak course connectivity. |
+| Hosting | Railway or Render are proposed options; deployment must remain replaceable and documented. |
+
+### Signer Adapter Shape
+
+The app should not be hardcoded to Nostash, even if Nostash is the recommended iOS Safari path.
+
+```ts
+export interface SignerAdapter {
+  type: "nip07" | "nip46" | "nip55" | "local-dev";
+  getPublicKey(): Promise<string>;
+  signEvent(event: UnsignedNostrEvent): Promise<SignedNostrEvent>;
+  nip44Encrypt?(pubkey: string, plaintext: string): Promise<string>;
+  nip44Decrypt?(pubkey: string, ciphertext: string): Promise<string>;
+}
 ```
 
-The issue templates are intentionally structured. Use them instead of blank issues whenever possible.
+---
+
+## Score Integrity
+
+Score validity and timestamp anchoring are separate concepts.
+
+| Mechanism | What it proves | What it does not prove |
+| --- | --- | --- |
+| Marker or signer attestation | A scorecard was reviewed or approved under event rules. | It does not prove the event existed at a specific external timestamp. |
+| Timestamp anchoring | A scorecard hash or attestation existed at or before a time. | It does not prove the score is valid. |
+| Zaps, likes, badges, or popularity | Social engagement. | They never prove a score is valid. |
+
+MVP verification should start with marker approval, organizer override, dispute handling, signed references, and an audit trail.
 
 ---
 
-## Issue Workflow
+## Roadmap
 
-Issues should be small enough to review and test. Large ideas should be split into backlog epics or multiple implementation issues.
+| Phase | Scope |
+| --- | --- |
+| Phase 0: Foundation | Reconcile repo governance files, ADRs, issue templates, PR template, CI skeleton, WSL scripts, data registry, and deck assets. |
+| Phase 1: MVP tournament loop | Nostr identity, Nostash/NIP-07 onboarding, registration, teams, roles, course baseline, scorekeeper flow, payment state, standings. |
+| Phase 2: Live event polish | Offline scorekeeping, public scoreboard, maps, announcements, dry run, QA, operational runbook. |
+| Phase 3: Ecosystem integration | Nostr publishing, NWC refinement, zaps, badges, sponsor dashboards, community course tools. |
+| Phase 4: Reusable platform | Multiple events, configurable formats, plugin surface, data exports, legally reviewed future regulated features. |
 
-Use the label families consistently:
+### Sprint Sequence
 
-- `area/...` — product or technical area
-- `priority/...` — sequencing importance
-- `role/...` — likely contributor profile
-- `license-review/required` — dependency or data source requires license review
-- `security-review/required` — sensitive area requires security review
-- `good-first-issue` — suitable for new contributors
-
-Typical flow:
-
-1. Create or pick an issue.
-2. Confirm acceptance criteria.
-3. Add area, priority, and role labels.
-4. Add `license-review/required` for new dependencies, external datasets, map/course data sources, or sponsor-provided services.
-5. Add `security-review/required` for identity, auth, wallet, payment, Nostr key handling, permissions, or infrastructure changes.
-6. Open a focused pull request.
-7. Link the pull request to the issue.
-8. Close the issue only after acceptance criteria and review checks are satisfied.
-
----
-
-## Issue Templates
-
-Use these templates:
-
-- **Feature request** — new product or technical capability
-- **Bug report** — broken behavior or regression
-- **Security review / vulnerability report** — security-sensitive work or responsible disclosure placeholder
-- **License review** — dependency, dataset, tool, map layer, or hosted service review
-- **UX review** — usability, accessibility, mobile/PWA, role-specific flows
-
-Security vulnerabilities should follow `SECURITY.md`. Do not disclose exploitable vulnerabilities publicly unless maintainers have agreed to a disclosure path.
-
----
-
-## Open Source Policy
-
-The project should use open-source components wherever possible.
-
-Every dependency should be reviewed for:
-
-- License type
-- Commercial compatibility
-- Copyleft obligations
-- Attribution requirements
-- Data license compatibility
-- Security posture
-- Operational maturity
-
-Labels such as `license-review/required` and `security-review/required` should be used for issues involving new dependencies, payment handling, wallet connections, identity, or external data ingestion.
-
----
-
-## Technical Direction
-
-The likely architecture is:
-
-- **Frontend:** Progressive Web App
-- **Identity:** Nostr public keys and signing flows
-- **Wallet connectivity:** Nostr Wallet Connect / NIP-47 where feasible
-- **Payments:** Bitcoin/Lightning, likely via BTCPay Server or compatible open-source components
-- **Backend:** API layer for registration, scoring, tournament state, and data ingestion
-- **Database:** Open-source relational database such as PostgreSQL
-- **Live updates:** Nostr relays and/or backend push mechanism
-- **Maps:** OpenStreetMap-compatible open-source mapping stack
-- **Course data:** Openly licensed imports plus community correction/enrichment workflow
-- **Deployment:** Containerized, reproducible, and contributor-friendly
+| Sprint | Primary outcomes |
+| --- | --- |
+| Sprint 0: Project foundation | Review and commit generated governance files, ADRs, issue templates, PR template, CI skeleton, data registry, labels, milestones, and issue import. |
+| Sprint 1: Identity and registration slice | PWA shell, guest-first entry, NIP-07 signer detection, Nostash onboarding modal, signed auth challenge, registration form, player/team model, organizer admin view, accessibility checks. |
+| Sprint 2: Course data and scorekeeper prototype | Course import/manual entry, course selection, basic score entry, standings calculation, initial attestation state. |
+| Sprint 3: Bitcoin/Lightning fee contribution | BTCPay adapter, NWC spike, payment status, registration confirmation, reconciliation view, failure/expiry states. |
+| Sprint 4: Live event readiness | Offline score entry, sync rules, public scoreboard, venue maps, event dry run, QA plan, operational runbook. |
+| Sprint 5: Wallet/course hardening | Wallet revocation/rotation, zaps/rewards controls, course correction queue, moderation, data-quality display. |
 
 ---
 
 ## Development Environment
 
-The project should support contributors using Linux, macOS, and Windows with WSL.
+This section reflects the v0.4.1 proposed implementation direction. Treat it as the working baseline until Sprint 0 confirms the committed repo layout and package scripts.
 
-For Windows contributors, use **VS Code with WSL** rather than running shell scripts from PowerShell.
+### Recommended Local Tools
 
-Recommended WSL flow:
+| Tool | Purpose |
+| --- | --- |
+| Git | Source control and contribution workflow. |
+| Node.js LTS | TypeScript, React/Vite PWA, Express API, build/test tooling. |
+| PostgreSQL | Local MVP data store for registration, roles, payments, scores, audit logs, and course data. |
+| Prisma CLI | Database schema, migrations, and generated client. |
+| GitHub CLI | Optional but useful for importing generated labels, milestones, and issues. |
+| WSL2 on Windows | Recommended Windows development path for GitHub import scripts and Unix-style tooling. |
+| LibreOffice CLI | Optional; used to render the pitch deck to PDF during docs/asset refreshes. |
+| Poppler `pdftoppm` | Optional; used to render pitch-deck PDF pages into PNG slide images. |
+| Python + Pillow | Optional; used to generate pitch-deck thumbnails. |
 
-```bash
-# Open the repository inside WSL
-cd ~/code/ride-or-die-scorecard
+### Expected Repo Layout
 
-# Check tooling
-git --version
-python3 --version
-gh --version
+The exact implementation layout should be confirmed in Sprint 0. A practical starting point is:
 
-# Authenticate GitHub CLI if needed
-gh auth login
+```text
+.
+├── apps/
+│   ├── web/                 # React/Vite PWA
+│   └── api/                 # Node/Express/TypeScript API
+├── packages/
+│   ├── shared/              # Shared types, validation, Nostr event helpers
+│   └── signer-adapters/     # NIP-07, NIP-46, NIP-55, local-dev adapters
+├── docs/
+│   ├── adr/                 # ADR template and ADR register
+│   ├── data-sources/        # Course-data registry
+│   ├── foundation/          # Foundation documents
+│   └── pitch-deck/          # Deck, PDF, rendered slides, thumbnails
+├── scripts/
+│   ├── ci/                  # CI placeholder/replacement scripts
+│   └── render_pitch_deck_assets.py
+└── .github/
+    ├── ISSUE_TEMPLATE/
+    ├── workflows/
+    └── pull_request_template.md
 ```
 
-If scripts fail because of Windows line endings, run:
+### Environment Variables
+
+Create `.env.local` or service-specific env files from the eventual `.env.example`. Do not commit secrets.
 
 ```bash
-find . -name "*.sh" -exec sed -i 's/\r$//' {} \;
-find . -name "*.sh" -exec chmod +x {} \;
+# Database
+DATABASE_URL="postgresql://ride_or_die:ride_or_die@localhost:5432/ride_or_die_scorecard"
+
+# Public app configuration
+APP_BASE_URL="http://localhost:5173"
+API_BASE_URL="http://localhost:3000"
+
+# Nostr
+NOSTR_DEFAULT_RELAYS=""
+NOSTR_AUTH_CHALLENGE_TTL_SECONDS="300"
+
+# Payments - placeholders only
+BTCPAY_URL=""
+BTCPAY_STORE_ID=""
+BTCPAY_API_KEY=""
+NWC_RELAY_URL=""
+
+# Operational mode
+NODE_ENV="development"
 ```
 
----
+Security rules:
 
-## Initial Sprint Direction
+- Never store raw `nsec` keys, seed phrases, wallet secrets, or user private keys in the app database.
+- Never ask users to paste raw `nsec` keys in the primary onboarding flow.
+- Keep BTCPay/NWC credentials server-side only.
+- Keep signer capability checks client-side, but verify signed auth challenges server-side.
 
-### Sprint 0: Project Foundation
+### First Local Setup
 
-Goal: make the project contribution-ready.
+Commands will need to be finalized when the app packages land. No package manager is locked in by v0.4.1; the example below uses npm placeholders until Sprint 0 confirms the repo scripts:
 
-Focus:
+```bash
+# 1. Clone the repository
+git clone <repo-url>
+cd ride-or-die-scorecard
 
-- Repository setup
-- README
-- License
-- Contribution guide
-- Code of conduct
-- Security policy
-- Support policy
-- Issue templates
-- Label and issue structure
-- Architecture decision records
-- Open-source dependency review process
+# 2. Install dependencies once package manifests exist
+npm install
 
-### Sprint 1: Identity and Registration
+# 3. Prepare local env files
+cp .env.example .env.local
 
-Goal: allow participants to identify and register.
+# 4. Start PostgreSQL locally, then run migrations once Prisma is initialized
+npx prisma migrate dev
 
-Focus:
+# 5. Run local development services
+npm run dev
 
-- Nostr identity prototype
-- Basic user roles
-- Player registration
-- Team assignment
-- Admin roster view
+# 6. Run quality checks before opening a PR
+npm run format
+npm run lint
+npm test
+```
 
-### Sprint 2: Course Data and Scoring Prototype
+Until the package scripts are real, CI should stay explicit about placeholder commands so contributors do not mistake scaffolding for a passing implementation.
 
-Goal: prove the core golf flow.
+### Local Nostr Signer Testing
 
-Focus:
+For Sprint 1, test these paths directly:
 
-- Course data model
-- Manual course setup
-- Scorekeeper score entry
-- Score validation
-- Basic leaderboard
+| Case | Expected behavior |
+| --- | --- |
+| Desktop browser with NIP-07 signer | `window.nostr` is detected; user can sign auth challenge. |
+| Desktop browser without signer | User stays in guest mode and sees signer guidance only on gated actions. |
+| iOS/iPadOS Safari with Nostash enabled | `window.nostr` is detected; user can connect and sign. |
+| iOS/iPadOS Safari without Nostash | User sees guided Nostash install/enable modal. |
+| iOS Home Screen PWA | Verify whether `window.nostr` exists. If not, show **Open in Safari to connect securely**. |
+| Android | Keep NIP-55 and/or NIP-46 paths behind the signer-adapter abstraction until ready. |
 
-### Sprint 3: Bitcoin/Lightning Payments
+### Refresh Pitch Deck Images
 
-Goal: connect registration to Bitcoin-native fee contribution.
+The rendered slide images and thumbnails in this package were generated from the v0.4.1 deck. To refresh them after editing the deck:
 
-Focus:
+```bash
+python scripts/render_pitch_deck_assets.py \
+  docs/pitch-deck/ride_or_die_scorecard_pitch_deck_v0_4_1_updated.pptx \
+  docs/pitch-deck
+```
 
-- Payment component selection
-- Lightning invoice generation or BTCPay integration
-- Payment status tracking
-- Paid/unpaid registration state
-- Wallet connection research/prototype
+The script writes:
 
-### Sprint 4: Live Event Readiness
-
-Goal: make the app usable during the on-site event.
-
-Focus:
-
-- Live scoreboard
-- Score correction flow
-- Role permissions
-- PWA polish
-- Accessibility pass
-- Event-day test plan
-
-### Sprint 5: Engagement and Data Enrichment
-
-Goal: extend the platform beyond basic scoring.
-
-Focus:
-
-- Pre-event practice scoring
-- Attestation flow
-- Zaps on score posts
-- Course ratings
-- Course correction proposals
-- Sponsor visibility hooks
+- Full-size PNG slides to `docs/pitch-deck/images/`
+- README thumbnails to `docs/pitch-deck/thumbnails/`
+- A PDF export beside the deck
 
 ---
 
-## Contribution Areas
+## Backlog Themes
 
-We need help with:
-
-- Product management
-- UX and accessibility
-- Frontend/PWA development
-- Backend development
-- Nostr protocol integration
-- Bitcoin/Lightning integration
-- BTCPay Server integration
-- Nostr Wallet Connect research
-- Golf scoring logic
-- Course data ingestion
-- OpenStreetMap and open map integration
-- QA and event-day testing
-- Security review
-- License review
-- Documentation
-- Sponsorship and ecosystem outreach
-
-Good first issues should be clearly marked with `good-first-issue`.
+| Theme | Epic scope |
+| --- | --- |
+| Identity and access | Guest-first entry, Nostr login/association, NIP-07 signer detection, Nostash onboarding, signed auth challenge, role permissions, admin access, fallback registration. |
+| Registration and teams | Player forms, team manager flows, roster status, rules acceptance, exports. |
+| Payments and wallets | BTCPay invoices, NWC wallet connection, WebLN fallback, fee status, zaps, rewards, reconciliation. |
+| Course data | Source registry, importers, normalization, benchmark regions, corrections, ratings. |
+| Maps and locations | OpenStreetMap venue display, hotels, meeting points, course maps, attribution. |
+| Scoring engine | Golf scoring format, hole-by-hole entry, validation, corrections, audit trail, state machine. |
+| Attestation and disputes | Validity attestations, marker review, organizer override, challenge/appeal windows, timestamp anchoring. |
+| Live scoreboard | Public standings, refresh strategy, score snapshots, Nostr events, fan display. |
+| PWA and offline | Installability, service worker, IndexedDB queue, sync, mobile-first outdoor UX. |
+| Accessibility and QA | WCAG-oriented acceptance criteria, keyboard/screen-reader testing, automated tests, dry runs. |
+| Governance and community | Contributor guide, code of conduct, issue templates, ADRs, bounties, sponsor policy. |
+| Future regulated features | Prediction/betting research only; legal gate before implementation. |
 
 ---
 
-## Definition of Done
+## Contribution Entry Points
 
-For MVP issues, done means:
-
-- The feature works in the intended user flow
-- Acceptance criteria are met
-- Relevant tests or manual test notes exist
-- Accessibility basics are considered
-- Security implications are reviewed where relevant
-- License implications are reviewed where relevant
-- Documentation is updated if behavior changes
-- The feature can be demoed by a contributor who did not build it
-
----
-
-## Guiding Principles
-
-- Open source first
-- Bitcoin only for monetary flows
-- Nostr-native identity and public event layer
-- Non-custodial wallet posture
-- Real tournament usability over abstract protocol purity
-- Mobile-first, PWA-first delivery
-- Accessibility is not optional
-- Data provenance matters
-- Legal/compliance review before betting or prediction markets
-- Build something people can actually use on event day
+| Contributor | Strong first contribution |
+| --- | --- |
+| Developer | Read this README, `CONTRIBUTING.md`, and the ADR index. Pick a good-first-issue after Sprint 0 status is clean. |
+| UX specialist | Review guest-to-unlock onboarding, Nostash signer modal, scorekeeper flow, wallet states, course corrections, and accessibility states. |
+| Nostr engineer | Review NIP-07/Nostash onboarding, signer abstraction, auth challenge, relay strategy, event kinds, NIP-46 fallback, and NIP-55 Android path. |
+| Lightning engineer | Review NWC/NIP-47, BTCPay invoices/webhooks, payment state machine, non-custodial UX, revocation, expiry, and reconciliation. |
+| Security reviewer | Focus on signing, wallet permissions, admin actions, payment status, audit logs, and CI metadata gates. |
+| License reviewer | Focus on dependency licenses, course-data licenses, ODbL mixing, attribution, and redistribution risk. |
+| Course data steward | Benchmark target regions, define field-level provenance, and separate raw imports, normalized records, user suggestions, and organizer-approved scoring data. |
+| Sponsor | Fund replaceable rails: hosting credits, wallet testing, security review, bounties, prizes, media, or course-data enrichment. |
+| Organizer | Validate the real event loop: registration, role assignment, scorekeeping, disputes, payment reconciliation, and event-day fallback procedures. |
 
 ---
 
-## Current Status
+## Risk Register Highlights
 
-This project is in early MVP planning and repository formation.
+| Risk | Severity | Control |
+| --- | --- | --- |
+| Generated-artifact drift | High | Confirm what is actually committed to the live repo and update docs when local artifacts diverge. |
+| ADR status confusion | High | Keep ADRs 0011-0022 Proposed until reviewed and accepted by PR. |
+| Course-data license conflict | High | Require license review before publishing or combining datasets. |
+| Offline score sync bugs | High | Test under real course connectivity conditions and force sync-failure scenarios. |
+| Scope creep | High | Protect the register/pay/score/attest loop before adding fan features. |
+| Regulatory exposure | High | Keep betting/prediction markets out of scope unless a separate legal ADR clears them. |
+| Signer onboarding friction | High | Keep guest mode open, guide iOS/iPadOS Safari users to Nostash, detect `window.nostr`, and keep fallback signer paths behind adapters. |
 
-The immediate priorities are:
+---
 
-1. Finalize repository governance files.
-2. Import the initial issue backlog.
-3. Validate labels, milestones, and issue templates.
-4. Start Sprint 0 project foundation work.
-5. Move from planning artifacts into working prototypes.
-
-<!-- pitch-deck:start -->
 ## Pitch Deck
 
-The **Ride or Die Scorecard** pitch deck explains the project vision, open-source strategy, product scope, technical architecture, roadmap, and call for builders/sponsors.
+The current pitch deck is **foundation deck v0.4.1**. It reflects the latest foundation-document direction: guest-first onboarding, Nostash on iOS/iPadOS Safari, signer adapters, proposed ADR discipline, score-integrity separation, Sprint 1 scope, wallet/payment direction, and updated risks.
 
-### Slide-by-slide table of contents
+- [Download the editable PowerPoint](docs/pitch-deck/ride_or_die_scorecard_pitch_deck_v0_4_1_updated.pptx)
+- [Open the PDF export](docs/pitch-deck/ride_or_die_scorecard_pitch_deck_v0_4_1_updated.pdf)
+- [Browse full-size slide images](docs/pitch-deck/images/)
+- [Browse README thumbnails](docs/pitch-deck/thumbnails/)
 
-| # | Slide | Full-size image |
-|---:|---|---|
-| 1 | [Introduction](#1-introduction) | [slide-01.png](./img/deck/slide-01.png) |
-| 2 | [Executive Summary](#2-executive-summary) | [slide-02.png](./img/deck/slide-02.png) |
-| 3 | [Vision, Mission & Objectives](#3-vision-mission--objectives) | [slide-03.png](./img/deck/slide-03.png) |
-| 4 | [Governance](#4-governance) | [slide-04.png](./img/deck/slide-04.png) |
-| 5 | [Roles](#5-roles) | [slide-05.png](./img/deck/slide-05.png) |
-| 6 | [Product & UX](#6-product--ux) | [slide-06.png](./img/deck/slide-06.png) |
-| 7 | [Sponsorship & Contributors](#7-sponsorship--contributors) | [slide-07.png](./img/deck/slide-07.png) |
-| 8 | [Technical Architecture](#8-technical-architecture) | [slide-08.png](./img/deck/slide-08.png) |
-| 9 | [Data Architecture](#9-data-architecture) | [slide-09.png](./img/deck/slide-09.png) |
-| 10 | [Security, Privacy & Accessibility](#10-security-privacy--accessibility) | [slide-10.png](./img/deck/slide-10.png) |
-| 11 | [Roadmap & MVP](#11-roadmap--mvp) | [slide-11.png](./img/deck/slide-11.png) |
-| 12 | [Backlog Themes](#12-backlog-themes) | [slide-12.png](./img/deck/slide-12.png) |
-| 13 | [Risks & Open Decisions](#13-risks--open-decisions) | [slide-13.png](./img/deck/slide-13.png) |
-| 14 | [Pre-Event Engagement](#14-pre-event-engagement) | [slide-14.png](./img/deck/slide-14.png) |
-| 15 | [Light Wallet & Course Maintenance](#15-light-wallet--course-maintenance) | [slide-15.png](./img/deck/slide-15.png) |
-| 16 | [Join the Build](#16-join-the-build) | [slide-16.png](./img/deck/slide-16.png) |
+### Slide Gallery
 
-### Deck gallery
+| 1 | 2 | 3 | 4 |
+| --- | --- | --- | --- |
+| [![Slide 1: Title](docs/pitch-deck/thumbnails/slide-01-thumb.png)](docs/pitch-deck/images/slide-01.png)<br>Title | [![Slide 2: Current Status](docs/pitch-deck/thumbnails/slide-02-thumb.png)](docs/pitch-deck/images/slide-02.png)<br>Current Status | [![Slide 3: What Changed in v0.4.1](docs/pitch-deck/thumbnails/slide-03-thumb.png)](docs/pitch-deck/images/slide-03.png)<br>v0.4.1 Update | [![Slide 4: Vision](docs/pitch-deck/thumbnails/slide-04-thumb.png)](docs/pitch-deck/images/slide-04.png)<br>Vision |
+| [![Slide 5: Governance](docs/pitch-deck/thumbnails/slide-05-thumb.png)](docs/pitch-deck/images/slide-05.png)<br>Governance | [![Slide 6: Roles](docs/pitch-deck/thumbnails/slide-06-thumb.png)](docs/pitch-deck/images/slide-06.png)<br>Roles | [![Slide 7: Product UX](docs/pitch-deck/thumbnails/slide-07-thumb.png)](docs/pitch-deck/images/slide-07.png)<br>Product + UX | [![Slide 8: Nostr Onboarding](docs/pitch-deck/thumbnails/slide-08-thumb.png)](docs/pitch-deck/images/slide-08.png)<br>Nostr Onboarding |
+| [![Slide 9: MVP Definition](docs/pitch-deck/thumbnails/slide-09-thumb.png)](docs/pitch-deck/images/slide-09.png)<br>MVP Definition | [![Slide 10: Technical Architecture](docs/pitch-deck/thumbnails/slide-10-thumb.png)](docs/pitch-deck/images/slide-10.png)<br>Architecture | [![Slide 11: Signer Adapters](docs/pitch-deck/thumbnails/slide-11-thumb.png)](docs/pitch-deck/images/slide-11.png)<br>Signer Adapters | [![Slide 12: Data Architecture](docs/pitch-deck/thumbnails/slide-12-thumb.png)](docs/pitch-deck/images/slide-12.png)<br>Course Data |
+| [![Slide 13: Score Integrity](docs/pitch-deck/thumbnails/slide-13-thumb.png)](docs/pitch-deck/images/slide-13.png)<br>Score Integrity | [![Slide 14: Wallet and Payments](docs/pitch-deck/thumbnails/slide-14-thumb.png)](docs/pitch-deck/images/slide-14.png)<br>Wallet + Payments | [![Slide 15: Security and Accessibility](docs/pitch-deck/thumbnails/slide-15-thumb.png)](docs/pitch-deck/images/slide-15.png)<br>Security + A11y | [![Slide 16: Roadmap and Sprints](docs/pitch-deck/thumbnails/slide-16-thumb.png)](docs/pitch-deck/images/slide-16.png)<br>Roadmap |
+| [![Slide 17: Backlog](docs/pitch-deck/thumbnails/slide-17-thumb.png)](docs/pitch-deck/images/slide-17.png)<br>Backlog | [![Slide 18: Risks](docs/pitch-deck/thumbnails/slide-18-thumb.png)](docs/pitch-deck/images/slide-18.png)<br>Risks | [![Slide 19: Call to Action](docs/pitch-deck/thumbnails/slide-19-thumb.png)](docs/pitch-deck/images/slide-19.png)<br>Call to Action |  |
 
-<table>
-  <tr>
-    <td width="25%" align="center"><a href="./img/deck/slide-01.png"><img src="./img/deck/thumbs/slide-01.png" alt="Slide 1 - Introduction" width="100%"></a><br><strong>1. Introduction</strong></td>
-    <td width="25%" align="center"><a href="./img/deck/slide-02.png"><img src="./img/deck/thumbs/slide-02.png" alt="Slide 2 - Executive Summary" width="100%"></a><br><strong>2. Executive Summary</strong></td>
-    <td width="25%" align="center"><a href="./img/deck/slide-03.png"><img src="./img/deck/thumbs/slide-03.png" alt="Slide 3 - Vision, Mission and Objectives" width="100%"></a><br><strong>3. Vision & Mission</strong></td>
-    <td width="25%" align="center"><a href="./img/deck/slide-04.png"><img src="./img/deck/thumbs/slide-04.png" alt="Slide 4 - Governance" width="100%"></a><br><strong>4. Governance</strong></td>
-  </tr>
-  <tr>
-    <td width="25%" align="center"><a href="./img/deck/slide-05.png"><img src="./img/deck/thumbs/slide-05.png" alt="Slide 5 - Roles" width="100%"></a><br><strong>5. Roles</strong></td>
-    <td width="25%" align="center"><a href="./img/deck/slide-06.png"><img src="./img/deck/thumbs/slide-06.png" alt="Slide 6 - Product and UX" width="100%"></a><br><strong>6. Product & UX</strong></td>
-    <td width="25%" align="center"><a href="./img/deck/slide-07.png"><img src="./img/deck/thumbs/slide-07.png" alt="Slide 7 - Sponsorship and Contributors" width="100%"></a><br><strong>7. Sponsorship</strong></td>
-    <td width="25%" align="center"><a href="./img/deck/slide-08.png"><img src="./img/deck/thumbs/slide-08.png" alt="Slide 8 - Technical Architecture" width="100%"></a><br><strong>8. Technical Architecture</strong></td>
-  </tr>
-  <tr>
-    <td width="25%" align="center"><a href="./img/deck/slide-09.png"><img src="./img/deck/thumbs/slide-09.png" alt="Slide 9 - Data Architecture" width="100%"></a><br><strong>9. Data Architecture</strong></td>
-    <td width="25%" align="center"><a href="./img/deck/slide-10.png"><img src="./img/deck/thumbs/slide-10.png" alt="Slide 10 - Security, Privacy and Accessibility" width="100%"></a><br><strong>10. Security & Privacy</strong></td>
-    <td width="25%" align="center"><a href="./img/deck/slide-11.png"><img src="./img/deck/thumbs/slide-11.png" alt="Slide 11 - Roadmap and MVP" width="100%"></a><br><strong>11. Roadmap & MVP</strong></td>
-    <td width="25%" align="center"><a href="./img/deck/slide-12.png"><img src="./img/deck/thumbs/slide-12.png" alt="Slide 12 - Backlog Themes" width="100%"></a><br><strong>12. Backlog Themes</strong></td>
-  </tr>
-  <tr>
-    <td width="25%" align="center"><a href="./img/deck/slide-13.png"><img src="./img/deck/thumbs/slide-13.png" alt="Slide 13 - Risks and Open Decisions" width="100%"></a><br><strong>13. Risks & Decisions</strong></td>
-    <td width="25%" align="center"><a href="./img/deck/slide-14.png"><img src="./img/deck/thumbs/slide-14.png" alt="Slide 14 - Pre-Event Engagement" width="100%"></a><br><strong>14. Pre-Event Engagement</strong></td>
-    <td width="25%" align="center"><a href="./img/deck/slide-15.png"><img src="./img/deck/thumbs/slide-15.png" alt="Slide 15 - Light Wallet and Course Maintenance" width="100%"></a><br><strong>15. Wallet & Course Data</strong></td>
-    <td width="25%" align="center"><a href="./img/deck/slide-16.png"><img src="./img/deck/thumbs/slide-16.png" alt="Slide 16 - Join the Build" width="100%"></a><br><strong>16. Join the Build</strong></td>
-  </tr>
-</table>
+---
 
-### Full slide image links
+## Foundation Documents
 
-Each thumbnail below links to the full-resolution slide image.
+- [Foundation document v0.4.1 - Nostash onboarding update](docs/foundation/ride_or_die_cup_foundation_document_v0_4_1_nostash_onboarding.docx)
 
-#### 1. Introduction
+---
 
-[![Slide 1 - Introduction](./img/deck/thumbs/slide-01.png)](./img/deck/slide-01.png)
+## Governance Notes
 
-#### 2. Executive Summary
+- Architecture-impacting changes should reference an accepted ADR or create/update one.
+- ADRs 0011-0022 are proposed until the maintainers explicitly accept or revise them.
+- Betting and prediction-market features are outside MVP and require separate legal/compliance review.
+- Course-data imports must preserve source, license, timestamp, transformation, and provenance metadata.
+- Releases should include changelog, migration notes, known limitations, and an event-readiness checklist.
 
-[![Slide 2 - Executive Summary](./img/deck/thumbs/slide-02.png)](./img/deck/slide-02.png)
+---
 
-#### 3. Vision, Mission & Objectives
+## License
 
-[![Slide 3 - Vision, Mission and Objectives](./img/deck/thumbs/slide-03.png)](./img/deck/slide-03.png)
-
-#### 4. Governance
-
-[![Slide 4 - Governance](./img/deck/thumbs/slide-04.png)](./img/deck/slide-04.png)
-
-#### 5. Roles
-
-[![Slide 5 - Roles](./img/deck/thumbs/slide-05.png)](./img/deck/slide-05.png)
-
-#### 6. Product & UX
-
-[![Slide 6 - Product and UX](./img/deck/thumbs/slide-06.png)](./img/deck/slide-06.png)
-
-#### 7. Sponsorship & Contributors
-
-[![Slide 7 - Sponsorship and Contributors](./img/deck/thumbs/slide-07.png)](./img/deck/slide-07.png)
-
-#### 8. Technical Architecture
-
-[![Slide 8 - Technical Architecture](./img/deck/thumbs/slide-08.png)](./img/deck/slide-08.png)
-
-#### 9. Data Architecture
-
-[![Slide 9 - Data Architecture](./img/deck/thumbs/slide-09.png)](./img/deck/slide-09.png)
-
-#### 10. Security, Privacy & Accessibility
-
-[![Slide 10 - Security, Privacy and Accessibility](./img/deck/thumbs/slide-10.png)](./img/deck/slide-10.png)
-
-#### 11. Roadmap & MVP
-
-[![Slide 11 - Roadmap and MVP](./img/deck/thumbs/slide-11.png)](./img/deck/slide-11.png)
-
-#### 12. Backlog Themes
-
-[![Slide 12 - Backlog Themes](./img/deck/thumbs/slide-12.png)](./img/deck/slide-12.png)
-
-#### 13. Risks & Open Decisions
-
-[![Slide 13 - Risks and Open Decisions](./img/deck/thumbs/slide-13.png)](./img/deck/slide-13.png)
-
-#### 14. Pre-Event Engagement
-
-[![Slide 14 - Pre-Event Engagement](./img/deck/thumbs/slide-14.png)](./img/deck/slide-14.png)
-
-#### 15. Light Wallet & Course Maintenance
-
-[![Slide 15 - Light Wallet and Course Maintenance](./img/deck/thumbs/slide-15.png)](./img/deck/slide-15.png)
-
-#### 16. Join the Build
-
-[![Slide 16 - Join the Build](./img/deck/thumbs/slide-16.png)](./img/deck/slide-16.png)
-<!-- pitch-deck:end -->
+Open-source is the project direction. Confirm the repository license before redistribution, dependency lock-in, or external data publishing.

@@ -18,7 +18,9 @@ Payment infrastructure choices impact:
 
 ## Decision
 
-We will use **BTCPay Server as the invoice generator and payment state tracker** for registration fees and organizer payouts.
+TBD
+
+Use **BTCPay Server as the invoice generator and payment state tracker** for registration fees and organizer payouts.
 
 Additionally:
 

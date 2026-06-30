@@ -8,8 +8,6 @@ Accepted
 - **Decision owners:** sebrock
 - **Reviewers:** sebrock
 
-
-
 ## Context
 
 The app needs Bitcoin/Lightning payments for registration fees, zaps, rewards, and possibly future payouts. The project should remain non-custodial and avoid holding user funds, private keys, or wallet seed phrases.

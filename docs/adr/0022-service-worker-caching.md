@@ -2,11 +2,7 @@
 
 ## Status
 
-Accepted
-
-- **Date:** 2026-06-23
-- **Decision owners:** sebrock
-- **Reviewers:** sebrock
+Proposed
 
 ## Context
 

@@ -2,7 +2,14 @@
 
 ## Status
 
-Proposed
+
+Accepted
+
+- **Date:** 2026-06-22
+- **Decision owners:** sebrock
+- **Reviewers:** sebrock
+
+
 
 ## Context
 
@@ -10,9 +17,7 @@ Ride or Die Scorecard should work across phones, tablets, and desktop devices wi
 
 ## Decision
 
-TBD.
-
-Proposed direction: build the MVP as a Progressive Web App.
+We will build the MVP as a Progressive Web App.
 
 ## Alternatives
 

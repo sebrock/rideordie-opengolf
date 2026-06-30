@@ -2,7 +2,13 @@
 
 ## Status
 
-Proposed
+Accepted
+
+- **Date:** 2026-06-22
+- **Decision owners:** sebrock
+- **Reviewers:** sebrock
+
+
 
 ## Context
 
@@ -12,9 +18,7 @@ Nostr Wallet Connect can connect a client application to a user-controlled walle
 
 ## Decision
 
-TBD.
-
-Proposed direction: use Nostr Wallet Connect / NIP-47 as the primary light-wallet connection layer for Lightning payments and wallet interactions.
+We are going to use Nostr Wallet Connect / NIP-47 as the primary light-wallet connection layer for Lightning payments and wallet interactions.
 
 ## Alternatives
 

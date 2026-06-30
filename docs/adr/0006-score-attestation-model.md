@@ -1,7 +1,15 @@
 # ADR 0006: Define Score Attestation Model
 
 ## Status
-Proposed
+
+
+Accepted
+
+- **Date:** 2026-06-22
+- **Decision owners:** sebrock
+- **Reviewers:** sebrock
+
+
 
 ## Context
 Pre-event qualification and practice scoring require trust. A player may submit a home-course score before the event, but another player, marker, or approved individual should attest that the score is plausible or correct.
@@ -9,9 +17,8 @@ Pre-event qualification and practice scoring require trust. A player may submit 
 Nostr identity can anchor submissions and attestations, while the app enforces scoring workflow and review rules.
 
 ## Decision
-TBD.
 
-Proposed direction: create an application-specific score attestation flow signed by Nostr identities, while evaluating relevant NIPs for timestamping, badges, zaps, and application-specific data.
+We will create an application-specific score attestation flow signed by Nostr identities, while evaluating relevant NIPs for timestamping, badges, zaps, and application-specific data.
 
 ## Alternatives
 - Organizer-only score verification.

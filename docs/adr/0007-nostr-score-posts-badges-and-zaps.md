@@ -2,7 +2,14 @@
 
 ## Status
 
-Proposed
+
+Accepted
+
+- **Date:** 2026-06-22
+- **Decision owners:** sebrock
+- **Reviewers:** sebrock
+
+
 
 ## Context
 
@@ -10,9 +17,9 @@ The app should create public engagement before and during the Ride or Die Cup. P
 
 ## Decision
 
-TBD.
-
-Proposed direction: publish selected score and achievement events to Nostr, support NIP-57 zaps, and explore NIP-58 badges for achievements.
+The system and eligible users can publish selected score and achievement events to Nostr.
+The system will support NIP-57 zaps.
+We will explore NIP-58 badges for achievements.
 
 ## Alternatives
 

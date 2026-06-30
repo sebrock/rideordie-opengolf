@@ -2,7 +2,14 @@
 
 ## Status
 
-Proposed
+
+Accepted
+
+- **Date:** 2026-06-22
+- **Decision owners:** sebrock
+- **Reviewers:** sebrock
+
+
 
 ## Context
 
@@ -12,9 +19,7 @@ Candidate sources include OpenGolfAPI, OpenStreetMap/OSM-derived data, Open Cour
 
 ## Decision
 
-TBD.
-
-Proposed direction: use open map components and normalize course data into an open internal model, with clear provenance for every field.
+We will use open map components and normalize course data into an open internal model, with clear provenance for every field.
 
 ## Alternatives
 

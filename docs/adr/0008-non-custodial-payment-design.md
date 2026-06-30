@@ -2,7 +2,14 @@
 
 ## Status
 
-Proposed
+
+Accepted
+
+- **Date:** 2026-06-22
+- **Decision owners:** sebrock
+- **Reviewers:** sebrock
+
+
 
 ## Context
 
@@ -10,9 +17,7 @@ The project handles Bitcoin/Lightning-adjacent flows including registration fees
 
 ## Decision
 
-TBD.
-
-Proposed direction: the app coordinates payments but does not custody user funds, private keys, wallet seed phrases, or raw spending credentials.
+The app coordinates payments but does not custody user funds, private keys, wallet seed phrases, or raw spending credentials.
 
 ## Alternatives
 

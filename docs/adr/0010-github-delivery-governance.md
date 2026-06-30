@@ -2,7 +2,12 @@
 
 ## Status
 
-Proposed
+Accepted
+
+- **Date:** 2026-06-30
+- **Decision owners:** sebrock
+- **Reviewers:** sebrock
+
 
 ## Context
 
@@ -12,9 +17,7 @@ The repo already includes README, CONTRIBUTING, issue templates, PR template, AD
 
 ## Decision
 
-TBD.
-
-Proposed direction: use GitHub issues, labels, milestones, PR templates, and ADRs as the primary delivery governance system.
+The project will use GitHub issues, labels, milestones, PR templates, and ADRs as the primary delivery governance system.
 
 ## Alternatives
 

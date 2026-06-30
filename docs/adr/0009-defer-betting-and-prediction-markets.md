@@ -2,7 +2,13 @@
 
 ## Status
 
-Proposed
+
+Accepted
+
+- **Date:** 2026-06-30
+- **Decision owners:** sebrock
+- **Reviewers:** sebrock
+
 
 ## Context
 
@@ -10,9 +16,7 @@ The project has discussed betting or prediction markets around event-specific ou
 
 ## Decision
 
-TBD.
-
-Proposed direction: explicitly defer betting and prediction market functionality from MVP until legal review, jurisdiction assessment, and product governance are complete.
+Explicitly defer betting and prediction market functionality from MVP until legal review, jurisdiction assessment, and product governance are complete.
 
 ## Alternatives
 
